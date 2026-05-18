@@ -1,12 +1,12 @@
-# rbWave
+# Synthwave Pro
 
 [English](README.md) • [Italiano](README_it.md)
 
 An Obsidian theme with a **VaporWave / RetroWave** vibe, built for people who spend long hours at the screen: programmers, engineers, heavy readers.
 
-![rbWave — Synthwave palette](background.png)
+![Synthwave Pro — Synthwave palette](background.png)
 
-![rbWave — Tokyo Night palette](background2.png)
+![Synthwave Pro — Tokyo Night palette](background2.png)
 
 ## Philosophy
 
@@ -18,10 +18,10 @@ An Obsidian theme with a **VaporWave / RetroWave** vibe, built for people who sp
 
 ## Installation
 
-1. Copy the `rbWave/` folder into `<vault>/.obsidian/themes/rbWave/`
-2. Settings → Appearance → Theme → select **rbWave**
+1. Copy the `obsidian-synthwave-pro/` folder into `<vault>/.obsidian/themes/obsidian-synthwave-pro/`
+2. Settings → Appearance → Theme → select **Synthwave Pro**
 3. Install the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) plugin
-4. Open Settings → Style Settings → rbWave
+4. Open Settings → Style Settings → Synthwave Pro
 
 ## Variants (Style Settings)
 
@@ -42,7 +42,7 @@ An Obsidian theme with a **VaporWave / RetroWave** vibe, built for people who sp
 ## Structure
 
 ```
-rbWave/
+obsidian-synthwave-pro/
 ├── manifest.json
 ├── theme.css
 ├── LICENSE
@@ -191,17 +191,21 @@ Add a `-` after the type to make it collapsed by default.
 
 **Ing. Roberto Bissanti** — aerospace engineer applied to renewable energy innovation (vertical-axis wind turbines, small wind systems, shape-memory alloys), based in Palermo, Sicily. Also a software developer for the cases the spreadsheet can't reach.
 
-Mac user since 1989 — old enough to remember when "dark mode" meant the screen was off. The eyes are no longer twenty, hence rbWave.
+Mac user since 1989 — old enough to remember when "dark mode" meant the screen was off. The eyes are no longer twenty, hence Synthwave Pro.
 
 - 📬 [roberto.bissanti@gmail.com](mailto:roberto.bissanti@gmail.com)
 - 💼 [LinkedIn](https://www.linkedin.com/in/roberto-bissanti/)
 - 🐙 [GitHub @robertobissanti](https://github.com/robertobissanti)
 
-Issues, ideas and PRs are welcome on [github.com/robertobissanti/rbWave](https://github.com/robertobissanti/rbWave).
+Issues, ideas and PRs are welcome on [github.com/robertobissanti/obsidian-synthwave-pro](https://github.com/robertobissanti/obsidian-synthwave-pro).
 
 ## License
 
-[GPL v2](LICENSE) — use, fork, modify.
+[MIT](LICENSE) — use, fork, modify.
+
+### Credits
+
+- Visual inspiration: [Obsidian SynthWave](https://github.com/marcoluzi/obsidian-synthwave) by [Marco Luzi](https://github.com/marcoluzi).
 
 ### Third-party assets
 
