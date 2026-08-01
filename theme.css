@@ -546,7 +546,7 @@ body.swp-mono-headings .markdown-preview-view h4::before { content: "#### "; col
 
 .callout {
   border-radius: 8px;
-  border: 1px solid color-mix(in srgb, rgb(var(--callout-color)) 40%, transparent);
+  border: 1px solid color-mix(in srgb, var(--callout-color) 40%, transparent);
 }
 
 /* Disambiguate the two visually-collapsing pairs.
@@ -555,14 +555,14 @@ body.swp-mono-headings .markdown-preview-view h4::before { content: "#### "; col
 /* TIP   = green flame (default already)            */
 /* IMPORTANT = magenta alert with stronger contrast */
 .callout[data-callout="important"] {
-  --callout-color: 200, 70, 200;
+  --callout-color: rgb(200, 70, 200);
   --callout-icon: lucide-alert-octagon;
 }
 
 /* WARNING = amber triangle (default already)       */
 /* CAUTION = red open hand (stop gesture)            */
 .callout[data-callout="caution"] {
-  --callout-color: 230, 60, 60;
+  --callout-color: rgb(230, 60, 60);
   --callout-icon: lucide-hand;
 }
 
