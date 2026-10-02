@@ -14,30 +14,35 @@ Tema Obsidian con vibe **VaporWave / RetroWave**, pensato per chi passa molte or
 - **Neon usato con parsimonia** — accenti riservati a heading, link, focus, syntax highlighting. Il body resta calmo.
 - **Contrasto WCAG AA** sul testo principale.
 - **Effetti retro opzionali** (glow, griglia prospettica, scanline CRT): tutti disattivati di default, attivabili da Style Settings.
-- **Vibe da programmazione**: heading monospace di default, prefissi `#`, `##` davanti ai titoli, code block con bordo neon, status bar in monospaced.
+- **Vibe da programmazione**: heading monospace di default, prefissi `#`, `##` davanti ai titoli, code block con bordo neon, status bar in monospaced. Lo stile di testo **Terminal** mette ogni riga delle note su una griglia monospace fissa, come in una finestra di terminale.
 
 ## Installazione
 
-1. Copia la cartella `obsidian-synthwave-pro/` in `<vault>/.obsidian/themes/obsidian-synthwave-pro/`
-2. Settings → Appearance → Theme → seleziona **Synthwave Pro**
-3. Installa il plugin [Style Settings](https://github.com/mgmeyers/obsidian-style-settings)
-4. Apri Settings → Style Settings → Synthwave Pro
+1. Settings → Appearance → Themes → **Manage**, cerca **Synthwave Pro**, poi **Install and use**
+2. Installa il plugin [Style Settings](https://github.com/mgmeyers/obsidian-style-settings)
+3. Apri Settings → Style Settings → Synthwave Pro
+
+Installazione manuale: copia `manifest.json` e `theme.css` in `<vault>/.obsidian/themes/Synthwave Pro/`, poi seleziona il tema in Settings → Appearance.
+
+Il tema usa `color-mix()`, che richiede un installer di Obsidian recente (Chromium 111 o successivo). Se i colori sembrano sbagliati, scarica l'ultimo installer da obsidian.md.
 
 ## Varianti (Style Settings)
 
 | Sezione | Opzioni |
 |---|---|
-| **Palette** | Synthwave (default) · Outrun · Miami · Tokyo Night · Soft Reading |
-| **Background depth** | Deep · Medium · Soft |
-| **Effetti** | Retro grid · Neon glow · CRT scanlines (tutti off di default) |
-| **Tipografia** | Heading monospace on/off · font text · font mono · size · line-height |
-| **Accenti** | Color picker primario / secondario per override |
+| **Palette** | Synthwave (default) · Outrun · Miami · Tokyo Night · Soft Reading · Catppuccin Frappé, Macchiato, Mocha (Latte in light mode) · profondità dello sfondo (Deep · Medium · Soft) |
+| **Typography** | Stile del testo: Classic (heading monospace) · Clean · Terminal (tutto monospace su una griglia di righe fissa) · font del testo e monospace · interlinea · peso del grassetto · larghezza di lettura |
+| **Headings** | Large o Compact (dimensione del testo, grassetto, colorati, con banda di sfondo) · `#` prima degli heading · dimensione degli heading · colore e intensità della banda |
+| **Images** | Attenuazione delle immagini in dark mode · luminosità |
+| **Effects** | Neon glow · retro grid · CRT scanlines (tutti off di default) |
+| **Callouts** | Stile (Thin border · Flat · Left bar · Neon · Dashed monospace) · colori dalla palette · titolo · icone nascoste · raggio · intensità dello sfondo |
+| **Advanced** | Sostituire la dimensione del font di Obsidian · colori personalizzati sopra la palette (accenti, sfondi, testo, heading, link, tag, evidenziazione) |
 
 ### Suggerimenti d'uso
 
 - **Sessioni di codice lunghe** → palette `Tokyo Night` o `Soft Reading`, glow off, depth medium.
 - **Vibe massima retrowave** → `Synthwave` + grid on + glow on (occhio al mal di testa dopo un'ora).
-- **Lettura prolungata di note** → `Soft Reading`, line-height 1.7, mono headings off.
+- **Lettura prolungata di note** → `Soft Reading`, line-height 1.7, stile del testo Clean.
 
 ## Struttura
 
@@ -45,6 +50,8 @@ Tema Obsidian con vibe **VaporWave / RetroWave**, pensato per chi passa molte or
 obsidian-synthwave-pro/
 ├── manifest.json
 ├── theme.css
+├── background.png      (screenshot, palette Synthwave)
+├── background2.png     (screenshot, palette Tokyo Night)
 ├── LICENSE
 ├── README.md
 └── README_it.md
@@ -206,6 +213,8 @@ Issue, idee e PR sono benvenute su [github.com/robertobissanti/obsidian-synthwav
 ### Crediti
 
 - Ispirazione visiva: [Obsidian SynthWave](https://github.com/marcoluzi/obsidian-synthwave) di [Marco Luzi](https://github.com/marcoluzi).
+- Le palette Catppuccin usano i colori ufficiali di [Catppuccin](https://github.com/catppuccin/catppuccin) (licenza MIT, © 2021 Catppuccin).
+- Stile di testo Terminal: tecnica della griglia di righe di [Stéphan Zych](https://stephan.zych.be/blog/terminal-style-site-lit-eleventy/).
 
 ### Asset di terze parti
 

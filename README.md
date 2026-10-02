@@ -14,30 +14,35 @@ An Obsidian theme with a **VaporWave / RetroWave** vibe, built for people who sp
 - **Neon used sparingly** — accents reserved for headings, links, focus and syntax highlighting. Body copy stays calm.
 - **WCAG AA contrast** on body text.
 - **Optional retro effects** (glow, perspective grid, CRT scanlines): all off by default, toggle from Style Settings.
-- **Programmer feel**: monospace headings by default, `#`/`##` prefixes on titles, code blocks with neon left border, monospaced status bar.
+- **Programmer feel**: monospace headings by default, `#`/`##` prefixes on titles, code blocks with neon left border, monospaced status bar. The **Terminal** text style puts every line of your notes on a fixed monospace grid, like a terminal window.
 
 ## Installation
 
-1. Copy the `obsidian-synthwave-pro/` folder into `<vault>/.obsidian/themes/obsidian-synthwave-pro/`
-2. Settings → Appearance → Theme → select **Synthwave Pro**
-3. Install the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) plugin
-4. Open Settings → Style Settings → Synthwave Pro
+1. Settings → Appearance → Themes → **Manage**, search for **Synthwave Pro**, then **Install and use**
+2. Install the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) plugin
+3. Open Settings → Style Settings → Synthwave Pro
+
+Manual install: copy `manifest.json` and `theme.css` into `<vault>/.obsidian/themes/Synthwave Pro/`, then select the theme in Settings → Appearance.
+
+The theme uses `color-mix()`, which needs a recent Obsidian installer (Chromium 111 or newer). If colors look wrong, download the latest installer from obsidian.md.
 
 ## Variants (Style Settings)
 
 | Section | Options |
 |---|---|
-| **Palette** | Synthwave (default) · Outrun · Miami · Tokyo Night · Soft Reading |
-| **Background depth** | Deep · Medium · Soft |
-| **Effects** | Retro grid · Neon glow · CRT scanlines (all off by default) |
-| **Typography** | Monospace headings on/off · text font · mono font · size · line-height |
-| **Accents** | Color picker for primary / secondary override |
+| **Palette** | Synthwave (default) · Outrun · Miami · Tokyo Night · Soft Reading · Catppuccin Frappé, Macchiato, Mocha (Latte in light mode) · background depth (Deep · Medium · Soft) |
+| **Typography** | Text style: Classic (monospace headings) · Clean · Terminal (all monospace on a fixed line grid) · text and monospace fonts · line height · bold weight · readable line width |
+| **Headings** | Large or Compact (text size, bold, colored, with a background band) · `#` before headings · heading size · band color and intensity |
+| **Images** | Dim images in dark mode · brightness |
+| **Effects** | Neon glow · retro grid · CRT scanlines (all off by default) |
+| **Callouts** | Style (Thin border · Flat · Left bar · Neon · Dashed monospace) · palette colors · title · hide icons · corner radius · background intensity |
+| **Advanced** | Override Obsidian's font size · custom colors on top of the palette (accents, backgrounds, text, headings, links, tags, highlight) |
 
 ### Usage hints
 
 - **Long coding sessions** → `Tokyo Night` or `Soft Reading` palette, glow off, depth medium.
 - **Maximum retrowave vibe** → `Synthwave` + grid on + glow on (mind the headache after an hour).
-- **Long reading** → `Soft Reading`, line-height 1.7, mono headings off.
+- **Long reading** → `Soft Reading`, line-height 1.7, text style Clean.
 
 ## Structure
 
@@ -45,6 +50,8 @@ An Obsidian theme with a **VaporWave / RetroWave** vibe, built for people who sp
 obsidian-synthwave-pro/
 ├── manifest.json
 ├── theme.css
+├── background.png      (screenshot, Synthwave palette)
+├── background2.png     (screenshot, Tokyo Night palette)
 ├── LICENSE
 ├── README.md
 └── README_it.md
@@ -206,6 +213,8 @@ Issues, ideas and PRs are welcome on [github.com/robertobissanti/obsidian-synthw
 ### Credits
 
 - Visual inspiration: [Obsidian SynthWave](https://github.com/marcoluzi/obsidian-synthwave) by [Marco Luzi](https://github.com/marcoluzi).
+- The Catppuccin palettes use the official colors of [Catppuccin](https://github.com/catppuccin/catppuccin) (MIT License, © 2021 Catppuccin).
+- Terminal text style: line-grid technique from [Stéphan Zych](https://stephan.zych.be/blog/terminal-style-site-lit-eleventy/).
 
 ### Third-party assets
 
