@@ -7,6 +7,22 @@ Versione corrente: `1.0.1`. Versione prevista per questo blocco di lavoro: **`1.
 
 Fonte: https://www.reddit.com/r/ObsidianMD/s/PBG2w1IGQx (commenti di u/Key-Concept-7001; u/rob-bix è l'autore del tema). Tutte le opzioni nuove vanno in Style Settings e sono spente o neutre di default, così chi usa già il tema non vede cambiamenti.
 
+### R-0 Bug: lo slider della dimensione del font di Obsidian non ha effetto
+
+> "The only problem I'm seeing is that the font size doesn't change with the slider" (u/cinematic_j)
+
+Da correggere per primo, anche come patch `1.0.2` se il resto della 1.1.0 tarda.
+
+Causa probabile, trovata leggendo `theme.css` (da confermare in Obsidian):
+- in `body` (sez. 1) il tema imposta `--font-text-size: var(--swp-font-size)`, cioè lega la dimensione al proprio slider Style Settings (default 16px);
+- in sez. 5 imposta `font-size: var(--swp-font-size)` direttamente su `.markdown-preview-view`, `.markdown-source-view` e `.cm-editor`. Questa regola ignora `--font-text-size`, quindi anche se Obsidian aggiorna la sua variabile quando si muove lo slider in Settings → Appearance → Font size (e con Ctrl + rotella), il testo resta fermo a `--swp-font-size`.
+
+Correzione prevista:
+- [ ] Togliere `--font-text-size: var(--swp-font-size)` da `body` e le dichiarazioni `font-size: var(--swp-font-size)` della sez. 5, così comanda lo slider di Obsidian.
+- [ ] Lo slider "Base font size" di Style Settings diventa facoltativo: `class-toggle` `swp-override-font-size` (default off), e solo con quella classe si applica `--font-text-size: var(--swp-font-size)`. Va detto nella descrizione dell'opzione che sostituisce lo slider di Obsidian.
+- [ ] Controllare che `line-height` e `letter-spacing` della sez. 5 restino validi.
+- [ ] Provare: slider di Obsidian, Ctrl + rotella, Ctrl + `+`/`-` (zoom dell'interfaccia), con e senza Style Settings installato.
+
 ### R-1 Più controllo sulla tipografia
 
 > "I like to customize typography in a theme, including the font size."
@@ -16,6 +32,7 @@ Oggi esistono già font del testo, font mono, dimensione base e interlinea, ma s
 - [ ] Rinominare il titolo della sezione in "Typography" (solo `title`, l'id `swp-fonts-heading` resta uguale per non perdere le impostazioni) e aprirla di default (`collapsed: false`).
 - [ ] Aggiungere `variable-text` per il font dell'interfaccia (`--font-interface-theme`, oggi uguale al testo) e per il font degli heading (`--swp-font-heading`, usato anche da "Monospace headings").
 - [ ] Aggiungere slider per: dimensione di ciascun heading h1-h6 in `em` (mappati su `--h1-size` … `--h6-size`), peso del testo (`--font-weight`), peso del grassetto (`--bold-weight`), dimensione del codice (`--code-size`), larghezza di lettura (`--file-line-width`), spaziatura tra paragrafi (`--p-spacing`), dimensione dell'interfaccia (`--font-ui-small` / `--font-ui-medium`).
+- [ ] Partire dopo la correzione di R-0: le nuove impostazioni non devono di nuovo scavalcare lo slider di Obsidian.
 - [ ] Controllare che gli slider degli heading non entrino in conflitto con "Compact headings" (sez. 2): con l'opzione attiva le dimensioni restano a `1em`.
 
 ### R-2 Attenuare le immagini (image dimming)
