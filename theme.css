@@ -138,7 +138,7 @@ settings:
     description: Applies when Obsidian's "Readable line length" is on.
     type: variable-number-slider
     default: 700
-    format: '{}px'
+    format: px
     min: 500
     max: 1200
     step: 20
@@ -206,7 +206,7 @@ settings:
     description: Compact headings with tinted band.
     type: variable-number-slider
     default: 14
-    format: '{}%'
+    format: '%'
     min: 4
     max: 40
     step: 1
@@ -240,7 +240,7 @@ settings:
     title: Image brightness
     type: variable-number-slider
     default: 80
-    format: '{}%'
+    format: '%'
     min: 40
     max: 100
     step: 5
@@ -340,7 +340,7 @@ settings:
     title: Corner radius
     type: variable-number-slider
     default: 8
-    format: '{}px'
+    format: px
     min: 0
     max: 20
     step: 1
@@ -373,7 +373,7 @@ settings:
     title: Base font size
     type: variable-number-slider
     default: 16
-    format: '{}px'
+    format: px
     min: 13
     max: 22
     step: 1

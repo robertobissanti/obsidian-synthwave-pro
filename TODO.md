@@ -303,3 +303,4 @@ Da `/notes/studio-tema-e-regole-obsidian.md` nei file del progetto:
 - [x] Le opzioni rese inutili da un'altra scelta sono nascoste nel pannello Style Settings (CSS su `.setting-item[data-id]`, classi sul body aggiornate da Style Settings al clic). Tabella delle regole nella sezione 9c di `theme.css`.
 - [x] "Bold weight" non aveva effetto: Obsidian 1.13 disegna il grassetto con `--bold-modifier`, non `--bold-weight`. Nuovo id `swp-bold-weight` che imposta il modificatore.
 - [x] Testo di "Text font" chiarito per Terminal (vale solo per l'interfaccia); stile callout "Terminal" rinominato "Dashed monospace" per non confonderlo con lo stile di testo.
+- [x] Slider con unità (Corner radius, Base font size, Readable line width, Band intensity, Image brightness) producevano valori invalidi: Style Settings aggiunge `format` alla lettera dopo il numero, quindi `'{}px'` dava `8{}px`. Ora `format: px` / `'%'`. Il difetto c'era già nella 1.0.1 per Base font size.
