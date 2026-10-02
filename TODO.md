@@ -297,3 +297,9 @@ Da `/notes/studio-tema-e-regole-obsidian.md` nei file del progetto:
 
 - [x] Aggiunte Catppuccin Frappé, Macchiato e Mocha (in light mode tutte e tre usano Latte), colori ufficiali da `catppuccin/palette` (`palette.json`). Mappatura: crust/base/mantle/surface0 per gli sfondi, surface1 per le linee, text/subtext0/overlay0 per il testo, mauve/blue/pink/yellow come accenti, green/peach/red per successo/avviso/errore. Credito MIT nei README.
 - [x] Background depth ora usa i toni della palette attiva: prima Deep e Soft in dark mode avevano valori fissi di Synthwave e davano sfondi sbagliati alle altre palette.
+
+## Audit delle opzioni (2026-10-02)
+
+- [x] Le opzioni rese inutili da un'altra scelta sono nascoste nel pannello Style Settings (CSS su `.setting-item[data-id]`, classi sul body aggiornate da Style Settings al clic). Tabella delle regole nella sezione 9c di `theme.css`.
+- [x] "Bold weight" non aveva effetto: Obsidian 1.13 disegna il grassetto con `--bold-modifier`, non `--bold-weight`. Nuovo id `swp-bold-weight` che imposta il modificatore.
+- [x] Testo di "Text font" chiarito per Terminal (vale solo per l'interfaccia); stile callout "Terminal" rinominato "Dashed monospace" per non confonderlo con lo stile di testo.

@@ -100,7 +100,7 @@ settings:
   -
     id: swp-font-text
     title: Text font
-    description: Font names separated by commas.
+    description: Font names separated by commas. With Text style Terminal it is used only for the interface.
     type: variable-text
     quotes: false
     default: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
@@ -123,8 +123,9 @@ settings:
     step: 0.05
 
   -
-    id: bold-weight
+    id: swp-bold-weight
     title: Bold weight
+    description: Weight of **bold** text.
     type: variable-number-slider
     default: 600
     min: 500
@@ -230,7 +231,7 @@ settings:
   -
     id: swp-dim-images
     title: Dim images
-    description: Dark mode only. Hover an image to see it at full brightness.
+    description: Dark mode only. Hover an image to see it at full brightness. Shows the brightness slider.
     type: class-toggle
     default: false
 
@@ -300,7 +301,7 @@ settings:
         label: Neon
         value: swp-callout-neon
       -
-        label: Terminal
+        label: Dashed monospace
         value: swp-callout-terminal
 
   -
@@ -363,7 +364,7 @@ settings:
   -
     id: swp-override-font-size
     title: Override Obsidian font size
-    description: When off, Settings → Appearance → Font size applies (recommended). When on, Base font size below applies.
+    description: When off, Settings → Appearance → Font size applies (recommended). When on, the Base font size slider appears.
     type: class-toggle
     default: false
 
@@ -380,7 +381,7 @@ settings:
   -
     id: swp-custom-colors
     title: Custom colors
-    description: When on, each color you change below replaces the palette one. Turn off to go back to the pure palette.
+    description: When on, the color pickers appear; each color you change replaces the palette one. Turn off to go back to the pure palette.
     type: class-toggle
     default: false
 
@@ -536,6 +537,9 @@ body {
   /* --font-text-size is left to Obsidian's Appearance → Font size slider.
      The theme's own size only applies with "Override Obsidian font size". */
   --line-height-normal:   var(--swp-line-height);
+  /* Obsidian 1.13 draws bold text as font weight + --bold-modifier */
+  --swp-bold-weight: 600;
+  --bold-modifier: calc(var(--swp-bold-weight) - var(--font-weight));
 
   /* Effective colors = palette values (--swp-p-*, sections 2-3).
      With "Custom colors" on, the --swp-c-* values from Style Settings win. */
@@ -1836,6 +1840,32 @@ body.swp-style-terminal .markdown-rendered hr {
   border: 0;
   height: var(--swp-lh);
   background: linear-gradient(var(--hr-color), var(--hr-color)) center / 100% 1px no-repeat;
+}
+
+/* =========================================================
+   9c. STYLE SETTINGS PANEL — hide options that have no effect
+   Style Settings sets each class-toggle/class-select value as a class on
+   body (live, as you click) and gives every row .setting-item[data-id].
+   An option that another choice overrides is hidden, so the panel only
+   shows what can still change something.
+   ========================================================= */
+/* Compact headings always show the # marks */
+body.swp-compact-headings .setting-item[data-id="swp-heading-hashes"],
+/* Compact headings and Terminal fix headings at text size */
+body:is(.swp-compact-headings, .swp-style-terminal) .setting-item[data-id="swp-heading-scale"],
+/* band options only for Compact headings */
+body:not(.swp-compact-headings) .setting-item:is([data-id="swp-heading-band"], [data-id="swp-heading-band-strength"], [data-id="swp-heading-band-color"]),
+body:not(.swp-band-tinted) .setting-item[data-id="swp-heading-band-strength"],
+body:not(.swp-band-custom) .setting-item[data-id="swp-heading-band-color"],
+/* brightness only when dimming is on */
+body:not(.swp-dim-images) .setting-item[data-id="swp-image-dim"],
+/* Terminal draws square callouts */
+body.swp-style-terminal .setting-item[data-id="swp-callout-radius"],
+/* Base font size only when it overrides Obsidian's */
+body:not(.swp-override-font-size) .setting-item[data-id="swp-font-size"],
+/* color pickers only when Custom colors is on */
+body:not(.swp-custom-colors) .setting-item:is([data-id="swp-accent-primary"], [data-id="swp-accent-secondary"], [data-id="swp-c-accent-3"], [data-id="swp-c-accent-4"], [data-id="swp-c-bg-1"], [data-id="swp-c-bg-2"], [data-id="swp-c-text"], [data-id="swp-c-muted"], [data-id="swp-c-h1"], [data-id="swp-c-h2"], [data-id="swp-c-h3"], [data-id="swp-c-h4"], [data-id="swp-c-link"], [data-id="swp-c-tag"], [data-id="swp-c-highlight"]) {
+  display: none;
 }
 
 /* =========================================================
