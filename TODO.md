@@ -284,3 +284,11 @@ Da `/notes/studio-tema-e-regole-obsidian.md` nei file del progetto:
 6. Su community.obsidian.md, pagina del tema: "Check for new releases" e controllare l'esito della review automatica.
 7. `versions.json` non serve ai temi.
 8. Rispondere sul thread Reddit (u/Key-Concept-7001) con le novità.
+
+## Correzioni dopo il primo test in Obsidian (2026-10-02)
+
+- [x] Callout senza sfondo né bordo: da Obsidian 1.13 `--callout-color` è un colore completo, non più una terna `r, g, b`. Il tema usava `rgb(var(--callout-color))` (anche nella 1.0.1, per il bordo), che ora è invalido. Ora usa `var(--callout-color)`; IMPORTANT e CAUTION hanno colori esadecimali.
+- [x] Terminal: testo dei callout (e di altri widget in Live Preview) proporzionale. Obsidian imposta `font-family: var(--font-text)` su `.cm-scroller` e sui widget; ora Terminal ridefinisce `--font-text` sulle viste.
+- [x] Heading compatti nell'editor più alti di una riga e disallineati dai numeri di riga: Obsidian aggiunge `padding-top: var(--p-spacing)` alle righe heading, finito dentro la banda. Azzerato con Compact headings.
+- [x] Titolo della nota (inline title) proporzionale: in Classic e Terminal ora usa il font monospace come gli heading.
+- [ ] Verificare se serve alzare `minAppVersion` alla versione di Obsidian che ha cambiato il formato di `--callout-color`.

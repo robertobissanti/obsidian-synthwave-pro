@@ -906,6 +906,12 @@ body.swp-style-classic .HyperMD-header {
   font-weight: 600;
 }
 
+/* note title above the text follows the heading font */
+body:is(.swp-style-classic, .swp-style-terminal) .inline-title {
+  font-family: var(--swp-font-mono);
+  letter-spacing: -0.02em;
+}
+
 /* "Show # before headings" (always on with compact headings) */
 body:is(.swp-heading-hashes, .swp-compact-headings) .markdown-preview-view h1::before { content: "# ";      color: var(--swp-faint); }
 body:is(.swp-heading-hashes, .swp-compact-headings) .markdown-preview-view h2::before { content: "## ";     color: var(--swp-faint); }
@@ -974,6 +980,12 @@ body.swp-compact-headings .markdown-preview-view :is(h1, h2, h3, h4, h5, h6)::be
 body.swp-compact-headings .markdown-source-view .HyperMD-header {
   border-radius: 4px;
   padding-inline: 0.5em;
+}
+/* Obsidian adds padding-top: var(--p-spacing) to heading lines; inside the
+   band it made headings taller than one line and pushed them off the line
+   numbers. */
+body.swp-compact-headings .cm-s-obsidian .cm-line.HyperMD-header {
+  padding-top: 0;
 }
 body.swp-compact-headings .markdown-source-view .HyperMD-header-1 { background-color: var(--swp-band-h1); }
 body.swp-compact-headings .markdown-source-view .HyperMD-header-2 { background-color: var(--swp-band-h2); }
@@ -1048,10 +1060,12 @@ body.swp-compact-headings .is-live-preview .HyperMD-header-6:not(.cm-active)::be
   border-radius: 999px;
 }
 
+/* Since Obsidian 1.13 --callout-color is a full color (it used to be an
+   "r, g, b" list wrapped in rgb()); the rules below use it as a color. */
 .callout {
   border-radius: var(--swp-callout-radius);
-  border: var(--swp-callout-border-width) solid color-mix(in srgb, var(--swp-callout-c, rgb(var(--callout-color))) 40%, transparent);
-  background-color: color-mix(in srgb, var(--swp-callout-c, rgb(var(--callout-color))) calc(var(--swp-callout-bg-opacity) * 100%), transparent);
+  border: var(--swp-callout-border-width) solid color-mix(in srgb, var(--swp-callout-c, var(--callout-color)) 40%, transparent);
+  background-color: color-mix(in srgb, var(--swp-callout-c, var(--callout-color)) calc(var(--swp-callout-bg-opacity) * 100%), transparent);
 }
 
 /* Disambiguate the two visually-collapsing pairs.
@@ -1060,14 +1074,14 @@ body.swp-compact-headings .is-live-preview .HyperMD-header-6:not(.cm-active)::be
 /* TIP   = green flame (default already)            */
 /* IMPORTANT = magenta alert with stronger contrast */
 .callout[data-callout="important"] {
-  --callout-color: 200, 70, 200;
+  --callout-color: #c846c8;
   --callout-icon: lucide-alert-octagon;
 }
 
 /* WARNING = amber triangle (default already)       */
 /* CAUTION = red open hand (stop gesture)            */
 .callout[data-callout="caution"] {
-  --callout-color: 230, 60, 60;
+  --callout-color: #e63c3c;
   --callout-icon: lucide-hand;
 }
 
@@ -1077,14 +1091,14 @@ body.swp-callout-flat .callout {
 }
 body.swp-callout-leftbar .callout {
   border: none;
-  border-left: calc(var(--swp-callout-border-width) + 3px) solid var(--swp-callout-c, rgb(var(--callout-color)));
+  border-left: calc(var(--swp-callout-border-width) + 3px) solid var(--swp-callout-c, var(--callout-color));
   border-radius: 0 var(--swp-callout-radius) var(--swp-callout-radius) 0;
 }
 body.swp-callout-neon .callout {
-  border-color: var(--swp-callout-c, rgb(var(--callout-color)));
+  border-color: var(--swp-callout-c, var(--callout-color));
   box-shadow:
-    0 0 8px color-mix(in srgb, var(--swp-callout-c, rgb(var(--callout-color))) 45%, transparent),
-    inset 0 0 8px color-mix(in srgb, var(--swp-callout-c, rgb(var(--callout-color))) 20%, transparent);
+    0 0 8px color-mix(in srgb, var(--swp-callout-c, var(--callout-color)) 45%, transparent),
+    inset 0 0 8px color-mix(in srgb, var(--swp-callout-c, var(--callout-color)) 20%, transparent);
 }
 body.swp-callout-terminal .callout {
   font-family: var(--swp-font-mono);
@@ -1630,7 +1644,9 @@ body.swp-scanlines.theme-light .app-container::after {
    ========================================================= */
 body.swp-style-terminal :is(.markdown-preview-view, .markdown-source-view) {
   --swp-lh: calc(var(--font-text-size) * var(--swp-line-height));
-  --font-text-theme: var(--swp-font-mono);
+  /* Obsidian sets font-family: var(--font-text) on .cm-scroller, callout
+     widgets etc., so the font is switched through the variable itself. */
+  --font-text: var(--swp-font-mono);
   --line-height-normal: var(--swp-lh);
   --line-height-tight: var(--swp-lh);
   --p-spacing: var(--swp-lh);
@@ -1670,7 +1686,8 @@ body.swp-style-terminal .markdown-preview-view :is(h1, h2, h3, h4, h5, h6) {
   padding-block: 0;
 }
 body.swp-style-terminal .markdown-preview-view :is(ul, ol) :is(ul, ol),
-body.swp-style-terminal .markdown-preview-view :is(.callout-content, blockquote) > :last-child {
+body.swp-style-terminal .markdown-preview-view blockquote > :last-child,
+body.swp-style-terminal .callout-content > :last-child {
   margin-block-end: 0;
 }
 body.swp-style-terminal .HyperMD-header {
@@ -1693,8 +1710,8 @@ body.swp-style-terminal .callout {
   border-block-width: 0;
   border-radius: 0;
   box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--swp-callout-c, rgb(var(--callout-color))) 40%, transparent),
-    inset 0 -1px 0 color-mix(in srgb, var(--swp-callout-c, rgb(var(--callout-color))) 40%, transparent);
+    inset 0 1px 0 color-mix(in srgb, var(--swp-callout-c, var(--callout-color)) 40%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, var(--swp-callout-c, var(--callout-color)) 40%, transparent);
 }
 body.swp-style-terminal.swp-callout-flat .callout,
 body.swp-style-terminal.swp-callout-leftbar .callout {
@@ -1702,9 +1719,9 @@ body.swp-style-terminal.swp-callout-leftbar .callout {
 }
 body.swp-style-terminal.swp-callout-neon .callout {
   box-shadow:
-    inset 0 1px 0 var(--swp-callout-c, rgb(var(--callout-color))),
-    inset 0 -1px 0 var(--swp-callout-c, rgb(var(--callout-color))),
-    0 0 8px color-mix(in srgb, var(--swp-callout-c, rgb(var(--callout-color))) 45%, transparent);
+    inset 0 1px 0 var(--swp-callout-c, var(--callout-color)),
+    inset 0 -1px 0 var(--swp-callout-c, var(--callout-color)),
+    0 0 8px color-mix(in srgb, var(--swp-callout-c, var(--callout-color)) 45%, transparent);
 }
 body.swp-style-terminal .callout-title {
   line-height: var(--swp-lh);
