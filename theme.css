@@ -15,9 +15,9 @@ name: Synthwave Pro
 id: synthwave-pro
 settings:
   -
-    id: swp-header-info
-    title: Synthwave Pro
-    description: VaporWave / RetroWave theme — readable, low eye-strain. Toggle palette and effects below.
+    id: swp-sec-palette
+    title: Palette
+    description: Colors of the theme. To change single colors, see Advanced.
     type: heading
     level: 2
     collapsed: false
@@ -25,147 +25,84 @@ settings:
   -
     id: swp-palette
     title: Palette
-    description: Choose the color scheme. "Soft Reading" desaturates accents for long sessions.
     type: class-select
     default: swp-palette-synthwave
     allowEmpty: false
     options:
       -
-        label: Synthwave (default — magenta + cyan on indigo)
+        label: Synthwave (magenta and cyan on indigo)
         value: swp-palette-synthwave
       -
-        label: Outrun (orange + pink sunset)
+        label: Outrun (orange and pink sunset)
         value: swp-palette-outrun
       -
-        label: Miami (teal + hot pink)
+        label: Miami (teal and hot pink)
         value: swp-palette-miami
       -
-        label: Tokyo Night (muted purple + blue)
+        label: Tokyo Night (muted purple and blue)
         value: swp-palette-tokyo
       -
-        label: Soft Reading (desaturated, eye-comfort)
+        label: Soft Reading (low saturation, easy on the eyes)
         value: swp-palette-soft
 
   -
     id: swp-bg-depth
     title: Background depth
-    description: How dark the editor background goes.
+    description: How dark the editor background is.
     type: class-select
     default: swp-bg-medium
     allowEmpty: false
     options:
       -
-        label: Deep (darkest indigo)
+        label: Deep
         value: swp-bg-deep
       -
-        label: Medium (default, balanced)
+        label: Medium
         value: swp-bg-medium
       -
-        label: Soft (lighter, less contrast)
+        label: Soft
         value: swp-bg-soft
 
   -
-    id: swp-grid
-    title: Retro grid background
-    description: Subtle perspective grid behind the workspace. Off by default.
-    type: class-toggle
-    default: false
-
-  -
-    id: swp-glow
-    title: Neon glow on headings & links
-    description: Adds a soft text-shadow. Off by default for max readability.
-    type: class-toggle
-    default: false
-
-  -
-    id: swp-scanlines
-    title: CRT scanlines
-    description: Very subtle horizontal scanlines. Pure aesthetics — leave off if it bothers you.
-    type: class-toggle
-    default: false
-
-  -
-    id: swp-dim-images
-    title: Dim images (dark mode)
-    description: Lowers image brightness for eye comfort. Hover an image to see it at full brightness.
-    type: class-toggle
-    default: false
-
-  -
-    id: swp-image-dim
-    title: Image brightness (%)
-    description: Used when "Dim images" is on.
-    type: variable-number-slider
-    default: 80
-    format: '{}%'
-    min: 40
-    max: 100
-    step: 5
-
-  -
-    id: swp-mono-headings
-    title: Monospace headings
-    description: Use a coding font for headings (programmer vibe).
-    type: class-toggle
-    default: true
-
-  -
-    id: swp-fonts-heading
+    id: swp-sec-typography
     title: Typography
     type: heading
-    level: 3
-    collapsed: false
+    level: 2
+    collapsed: true
+
+  -
+    id: swp-text-style
+    title: Text style
+    description: Terminal sets all text in the monospace font on a fixed line grid, like a terminal window.
+    type: class-select
+    default: swp-style-classic
+    allowEmpty: false
+    options:
+      -
+        label: Classic (monospace headings, normal text)
+        value: swp-style-classic
+      -
+        label: Clean (no monospace)
+        value: swp-style-clean
+      -
+        label: Terminal (everything monospace, fixed line grid)
+        value: swp-style-terminal
 
   -
     id: swp-font-text
     title: Text font
-    description: Body text font family. Comma-separated list, no surrounding quotes.
-    type: variable-text
-    quotes: false
-    default: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
-
-  -
-    id: swp-font-interface
-    title: Interface font
-    description: Font for menus, sidebars and tabs. Leave as is to use the text font.
-    type: variable-text
-    quotes: false
-    default: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
-
-  -
-    id: swp-font-heading
-    title: Heading font
-    description: Font for headings when "Monospace headings" is off.
+    description: Font names separated by commas.
     type: variable-text
     quotes: false
     default: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
 
   -
     id: swp-font-mono
-    title: Monospace / code font
-    description: Used for code blocks and (optionally) headings.
+    title: Monospace font
+    description: Used for code, headings in Classic and all text in Terminal.
     type: variable-text
     quotes: false
     default: "'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, Consolas, monospace"
-
-  -
-    id: swp-override-font-size
-    title: Override Obsidian font size
-    description: Off = use Settings → Appearance → Font size (recommended). On = use the slider below instead.
-    type: class-toggle
-    default: false
-
-  -
-    id: swp-font-size
-    title: Base font size (px)
-    description: Only used when "Override Obsidian font size" is on.
-    type: variable-number-slider
-    default: 16
-    format: '{}px'
-    min: 13
-    max: 22
-    step: 1
 
   -
     id: swp-line-height
@@ -186,19 +123,9 @@ settings:
     step: 100
 
   -
-    id: code-size
-    title: Code font size (em)
-    type: variable-number-slider
-    default: 0.875
-    format: '{}em'
-    min: 0.7
-    max: 1.1
-    step: 0.025
-
-  -
     id: file-line-width
     title: Readable line width (px)
-    description: Used when Obsidian's "Readable line length" is on.
+    description: Applies when Obsidian's "Readable line length" is on.
     type: variable-number-slider
     default: 700
     format: '{}px'
@@ -207,101 +134,57 @@ settings:
     step: 20
 
   -
-    id: p-spacing
-    title: Paragraph spacing (rem)
-    type: variable-number-slider
-    default: 1
-    format: '{}rem'
-    min: 0.25
-    max: 2
-    step: 0.25
-
-  -
-    id: h1-size
-    title: H1 size (em)
-    type: variable-number-slider
-    default: 1.802
-    format: '{}em'
-    min: 0.8
-    max: 3
-    step: 0.05
-
-  -
-    id: h2-size
-    title: H2 size (em)
-    type: variable-number-slider
-    default: 1.602
-    format: '{}em'
-    min: 0.8
-    max: 3
-    step: 0.05
-
-  -
-    id: h3-size
-    title: H3 size (em)
-    type: variable-number-slider
-    default: 1.424
-    format: '{}em'
-    min: 0.8
-    max: 3
-    step: 0.05
-
-  -
-    id: h4-size
-    title: H4 size (em)
-    type: variable-number-slider
-    default: 1.266
-    format: '{}em'
-    min: 0.8
-    max: 3
-    step: 0.05
-
-  -
-    id: h5-size
-    title: H5 size (em)
-    type: variable-number-slider
-    default: 1.125
-    format: '{}em'
-    min: 0.8
-    max: 3
-    step: 0.05
-
-  -
-    id: h6-size
-    title: H6 size (em)
-    type: variable-number-slider
-    default: 1
-    format: '{}em'
-    min: 0.8
-    max: 3
-    step: 0.05
-
-  -
-    id: swp-headings-section
-    title: Compact headings
+    id: swp-sec-headings
+    title: Headings
     type: heading
-    level: 3
+    level: 2
     collapsed: true
 
   -
-    id: swp-compact-headings
-    title: Compact headings
-    description: Headings use the body font size, stay bold and colored, keep their leading # marks and sit on a background band. Overrides the H1-H6 sizes above.
+    id: swp-heading-style
+    title: Heading style
+    description: Compact makes headings as big as the text, bold and colored, on a background band.
+    type: class-select
+    default: swp-headings-large
+    allowEmpty: false
+    options:
+      -
+        label: Large (default)
+        value: swp-headings-large
+      -
+        label: Compact (text size with a band)
+        value: swp-compact-headings
+
+  -
+    id: swp-heading-hashes
+    title: "Show # before headings"
+    description: "Shows #, ## and ### before headings. Always on with Compact headings."
     type: class-toggle
-    default: false
+    default: true
+
+  -
+    id: swp-heading-scale
+    title: Heading size
+    description: 1 = normal. Ignored with Compact headings and in Terminal.
+    type: variable-number-slider
+    default: 1
+    min: 0.7
+    max: 1.5
+    step: 0.05
 
   -
     id: swp-heading-band
-    title: Heading band color
+    title: Band color
+    description: Compact headings only.
     type: class-select
     default: swp-band-tinted
     allowEmpty: false
     options:
       -
-        label: Tinted by heading level (default)
+        label: Heading color, tinted
         value: swp-band-tinted
       -
-        label: Single custom color
+        label: Custom color
         value: swp-band-custom
       -
         label: No band
@@ -309,8 +192,8 @@ settings:
 
   -
     id: swp-heading-band-strength
-    title: Band intensity (%)
-    description: How much of the heading color is mixed into the band (tinted mode).
+    title: Band intensity
+    description: Compact headings with tinted band.
     type: variable-number-slider
     default: 14
     format: '{}%'
@@ -321,7 +204,7 @@ settings:
   -
     id: swp-heading-band-color
     title: Custom band color
-    description: Used when "Single custom color" is selected.
+    description: Compact headings with custom band color.
     type: variable-themed-color
     format: hex
     default-dark: '#2a1f4a'
@@ -329,60 +212,127 @@ settings:
     opacity: false
 
   -
-    id: swp-callout-section
+    id: swp-sec-images
+    title: Images
+    type: heading
+    level: 2
+    collapsed: true
+
+  -
+    id: swp-dim-images
+    title: Dim images
+    description: Dark mode only. Hover an image to see it at full brightness.
+    type: class-toggle
+    default: false
+
+  -
+    id: swp-image-dim
+    title: Image brightness
+    type: variable-number-slider
+    default: 80
+    format: '{}%'
+    min: 40
+    max: 100
+    step: 5
+
+  -
+    id: swp-sec-effects
+    title: Effects
+    description: Retro effects, all off by default.
+    type: heading
+    level: 2
+    collapsed: true
+
+  -
+    id: swp-glow
+    title: Neon glow
+    description: Soft glow on headings and links.
+    type: class-toggle
+    default: false
+
+  -
+    id: swp-grid
+    title: Retro grid
+    description: Perspective grid behind notes.
+    type: class-toggle
+    default: false
+
+  -
+    id: swp-scanlines
+    title: CRT scanlines
+    description: Moving horizontal lines over the window. Not shown on full-screen images and dialogs.
+    type: class-toggle
+    default: false
+
+  -
+    id: swp-sec-callouts
     title: Callouts
     type: heading
-    level: 3
+    level: 2
     collapsed: true
 
   -
     id: swp-callout-style
-    title: Callout style
+    title: Style
     type: class-select
     default: swp-callout-default
     allowEmpty: false
     options:
       -
-        label: Default (thin border)
+        label: Thin border (default)
         value: swp-callout-default
       -
-        label: Flat (no border)
+        label: Flat
         value: swp-callout-flat
       -
         label: Left bar
         value: swp-callout-leftbar
       -
-        label: Neon (glowing border)
+        label: Neon
         value: swp-callout-neon
       -
-        label: Terminal (monospace, dashed)
+        label: Terminal
         value: swp-callout-terminal
 
   -
     id: swp-callout-palette
-    title: Callout colors from palette
-    description: Color callouts with the palette accents instead of Obsidian's standard colors.
+    title: Colors from palette
+    description: Use the palette colors instead of the standard Obsidian ones.
+    type: class-toggle
+    default: false
+
+  -
+    id: swp-callout-title-weight
+    title: Title
+    type: class-select
+    default: swp-callout-title-bold
+    allowEmpty: false
+    options:
+      -
+        label: Bold
+        value: swp-callout-title-bold
+      -
+        label: Normal
+        value: swp-callout-title-normal
+      -
+        label: Uppercase
+        value: swp-callout-title-upper
+
+  -
+    id: swp-callout-hide-icon
+    title: Hide icons
+    description: Hides the icon in the callout title.
     type: class-toggle
     default: false
 
   -
     id: swp-callout-radius
-    title: Corner radius (px)
+    title: Corner radius
     type: variable-number-slider
     default: 8
     format: '{}px'
     min: 0
     max: 20
-    step: 1
-
-  -
-    id: swp-callout-border-width
-    title: Border width (px)
-    type: variable-number-slider
-    default: 1
-    format: '{}px'
-    min: 0
-    max: 4
     step: 1
 
   -
@@ -395,45 +345,39 @@ settings:
     step: 0.02
 
   -
-    id: swp-callout-title-weight
-    title: Callout title
-    type: class-select
-    default: swp-callout-title-bold
-    allowEmpty: false
-    options:
-      -
-        label: Bold (default)
-        value: swp-callout-title-bold
-      -
-        label: Normal weight
-        value: swp-callout-title-normal
-      -
-        label: Uppercase
-        value: swp-callout-title-upper
+    id: swp-sec-advanced
+    title: Advanced
+    type: heading
+    level: 2
+    collapsed: true
 
   -
-    id: swp-callout-hide-icon
-    title: Hide callout icons
+    id: swp-override-font-size
+    title: Override Obsidian font size
+    description: When off, Settings → Appearance → Font size applies (recommended). When on, Base font size below applies.
     type: class-toggle
     default: false
 
   -
-    id: swp-accent-section
-    title: Custom colors
-    type: heading
-    level: 3
-    collapsed: true
+    id: swp-font-size
+    title: Base font size
+    type: variable-number-slider
+    default: 16
+    format: '{}px'
+    min: 13
+    max: 22
+    step: 1
 
   -
     id: swp-custom-colors
-    title: Use custom colors
-    description: Start from the palette above, then override only the colors you change below. Turn off to go back to the pure palette.
+    title: Custom colors
+    description: When on, each color you change below replaces the palette one. Turn off to go back to the pure palette.
     type: class-toggle
     default: false
 
   -
     id: swp-accent-primary
-    title: Primary accent
+    title: Accent 1
     type: variable-themed-color
     format: hex
     default-dark: '#ff3ec8'
@@ -442,7 +386,7 @@ settings:
 
   -
     id: swp-accent-secondary
-    title: Secondary accent
+    title: Accent 2
     type: variable-themed-color
     format: hex
     default-dark: '#36e2ec'
@@ -451,7 +395,7 @@ settings:
 
   -
     id: swp-c-accent-3
-    title: Third accent
+    title: Accent 3
     type: variable-themed-color
     format: hex
     default-dark: '#b56cff'
@@ -460,7 +404,7 @@ settings:
 
   -
     id: swp-c-accent-4
-    title: Fourth accent
+    title: Accent 4
     type: variable-themed-color
     format: hex
     default-dark: '#ffd23f'
@@ -496,7 +440,7 @@ settings:
 
   -
     id: swp-c-muted
-    title: Muted text
+    title: Secondary text
     type: variable-themed-color
     format: hex
     default-dark: '#a89fcf'
@@ -505,7 +449,7 @@ settings:
 
   -
     id: swp-c-h1
-    title: H1
+    title: Heading 1
     type: variable-themed-color
     format: hex
     default-dark: '#ff3ec8'
@@ -514,7 +458,7 @@ settings:
 
   -
     id: swp-c-h2
-    title: H2
+    title: Heading 2
     type: variable-themed-color
     format: hex
     default-dark: '#36e2ec'
@@ -523,7 +467,7 @@ settings:
 
   -
     id: swp-c-h3
-    title: H3
+    title: Heading 3
     type: variable-themed-color
     format: hex
     default-dark: '#b56cff'
@@ -532,7 +476,7 @@ settings:
 
   -
     id: swp-c-h4
-    title: H4
+    title: Heading 4
     type: variable-themed-color
     format: hex
     default-dark: '#ffd23f'
@@ -566,24 +510,6 @@ settings:
     default-light: '#b8860b'
     opacity: false
 
-  -
-    id: swp-c-bold
-    title: Bold text
-    type: variable-themed-color
-    format: hex
-    default-dark: '#ece6ff'
-    default-light: '#2a2440'
-    opacity: false
-
-  -
-    id: swp-c-italic
-    title: Italic text
-    type: variable-themed-color
-    format: hex
-    default-dark: '#ece6ff'
-    default-light: '#2a2440'
-    opacity: false
-
 */
 
 /* =========================================================
@@ -595,11 +521,8 @@ body {
   --swp-font-size: 16px;
   --swp-line-height: 1.65;
 
-  --swp-font-interface: var(--swp-font-text);
-  --swp-font-heading: var(--swp-font-text);
-
   --font-text-theme:      var(--swp-font-text);
-  --font-interface-theme: var(--swp-font-interface);
+  --font-interface-theme: var(--swp-font-text);
   --font-monospace-theme: var(--swp-font-mono);
   /* --font-text-size is left to Obsidian's Appearance → Font size slider.
      The theme's own size only applies with "Override Obsidian font size". */
@@ -726,8 +649,6 @@ body.swp-custom-colors {
   --tag-color:  var(--swp-c-tag, var(--swp-accent-3));
   --tag-background: color-mix(in srgb, var(--swp-c-tag, var(--swp-accent-3)) 18%, transparent);
   --text-highlight-bg: color-mix(in srgb, var(--swp-c-highlight, var(--swp-accent-4)) 35%, transparent);
-  --bold-color:   var(--swp-c-bold, currentColor);
-  --italic-color: var(--swp-c-italic, currentColor);
 }
 
 /* =========================================================
@@ -952,13 +873,15 @@ body.swp-override-font-size .markdown-source-view {
   --font-text-size: var(--swp-font-size);
 }
 
+/* Heading sizes: Obsidian's default scale times "Heading size" */
 body {
-  --h1-font: var(--swp-font-heading);
-  --h2-font: var(--swp-font-heading);
-  --h3-font: var(--swp-font-heading);
-  --h4-font: var(--swp-font-heading);
-  --h5-font: var(--swp-font-heading);
-  --h6-font: var(--swp-font-heading);
+  --swp-heading-scale: 1;
+  --h1-size: calc(1.802em * var(--swp-heading-scale));
+  --h2-size: calc(1.602em * var(--swp-heading-scale));
+  --h3-size: calc(1.424em * var(--swp-heading-scale));
+  --h4-size: calc(1.266em * var(--swp-heading-scale));
+  --h5-size: calc(1.125em * var(--swp-heading-scale));
+  --h6-size: calc(1em * var(--swp-heading-scale));
 }
 
 .markdown-preview-view h1, .HyperMD-header-1,
@@ -970,26 +893,26 @@ body {
   line-height: 1.25;
 }
 
-/* monospace headings option */
-body.swp-mono-headings .markdown-preview-view h1,
-body.swp-mono-headings .markdown-preview-view h2,
-body.swp-mono-headings .markdown-preview-view h3,
-body.swp-mono-headings .markdown-preview-view h4,
-body.swp-mono-headings .markdown-preview-view h5,
-body.swp-mono-headings .markdown-preview-view h6,
-body.swp-mono-headings .HyperMD-header {
+/* Text style: Classic = monospace headings */
+body.swp-style-classic .markdown-preview-view h1,
+body.swp-style-classic .markdown-preview-view h2,
+body.swp-style-classic .markdown-preview-view h3,
+body.swp-style-classic .markdown-preview-view h4,
+body.swp-style-classic .markdown-preview-view h5,
+body.swp-style-classic .markdown-preview-view h6,
+body.swp-style-classic .HyperMD-header {
   font-family: var(--swp-font-mono);
   letter-spacing: -0.02em;
   font-weight: 600;
 }
 
-/* heading prefix marker — programmer-ish (also used by compact headings) */
-body:is(.swp-mono-headings, .swp-compact-headings) .markdown-preview-view h1::before { content: "# ";      color: var(--swp-faint); }
-body:is(.swp-mono-headings, .swp-compact-headings) .markdown-preview-view h2::before { content: "## ";     color: var(--swp-faint); }
-body:is(.swp-mono-headings, .swp-compact-headings) .markdown-preview-view h3::before { content: "### ";    color: var(--swp-faint); }
-body:is(.swp-mono-headings, .swp-compact-headings) .markdown-preview-view h4::before { content: "#### ";   color: var(--swp-faint); }
-body:is(.swp-mono-headings, .swp-compact-headings) .markdown-preview-view h5::before { content: "##### ";  color: var(--swp-faint); }
-body:is(.swp-mono-headings, .swp-compact-headings) .markdown-preview-view h6::before { content: "###### "; color: var(--swp-faint); }
+/* "Show # before headings" (always on with compact headings) */
+body:is(.swp-heading-hashes, .swp-compact-headings) .markdown-preview-view h1::before { content: "# ";      color: var(--swp-faint); }
+body:is(.swp-heading-hashes, .swp-compact-headings) .markdown-preview-view h2::before { content: "## ";     color: var(--swp-faint); }
+body:is(.swp-heading-hashes, .swp-compact-headings) .markdown-preview-view h3::before { content: "### ";    color: var(--swp-faint); }
+body:is(.swp-heading-hashes, .swp-compact-headings) .markdown-preview-view h4::before { content: "#### ";   color: var(--swp-faint); }
+body:is(.swp-heading-hashes, .swp-compact-headings) .markdown-preview-view h5::before { content: "##### ";  color: var(--swp-faint); }
+body:is(.swp-heading-hashes, .swp-compact-headings) .markdown-preview-view h6::before { content: "###### "; color: var(--swp-faint); }
 
 /* ---------------------------------------------------------
    5b. COMPACT HEADINGS (off by default)
@@ -1692,6 +1615,121 @@ body.swp-scanlines.theme-light .app-container::after {
     transparent 2px,
     transparent 4px
   );
+}
+
+/* =========================================================
+   9b. TERMINAL TEXT STYLE (Typography → Text style → Terminal)
+   All note text in the monospace font on a fixed line grid, after
+   https://stephan.zych.be/blog/terminal-style-site-lit-eleventy/ :
+   - one grid line = font size × line height, resolved to px
+     (a unitless line-height would scale with each element's font);
+   - every vertical margin and padding is a whole number of lines;
+   - horizontal rules and block borders are painted with box-shadow
+     or gradients, so they add no height and the grid never drifts.
+   Images keep their own height and are the one known exception.
+   ========================================================= */
+body.swp-style-terminal :is(.markdown-preview-view, .markdown-source-view) {
+  --swp-lh: calc(var(--font-text-size) * var(--swp-line-height));
+  --font-text-theme: var(--swp-font-mono);
+  --line-height-normal: var(--swp-lh);
+  --line-height-tight: var(--swp-lh);
+  --p-spacing: var(--swp-lh);
+  --heading-spacing: var(--swp-lh);
+  --h1-size: 1em; --h2-size: 1em; --h3-size: 1em;
+  --h4-size: 1em; --h5-size: 1em; --h6-size: 1em;
+  --h1-weight: 700; --h2-weight: 700; --h3-weight: 700;
+  --h4-weight: 700; --h5-weight: 700; --h6-weight: 700;
+  --h1-line-height: var(--swp-lh); --h2-line-height: var(--swp-lh);
+  --h3-line-height: var(--swp-lh); --h4-line-height: var(--swp-lh);
+  --h5-line-height: var(--swp-lh); --h6-line-height: var(--swp-lh);
+  --table-border-width: 0;
+  font-family: var(--swp-font-mono);
+  line-height: var(--swp-lh);
+  letter-spacing: 0;
+}
+/* whole pixels, so 40 lines are exactly 40 × the line */
+@supports (top: round(1.5px, 1px)) {
+  body.swp-style-terminal :is(.markdown-preview-view, .markdown-source-view) {
+    --swp-lh: round(calc(var(--font-text-size) * var(--swp-line-height)), 1px);
+  }
+}
+
+body.swp-style-terminal :is(.markdown-preview-view, .markdown-source-view) :is(h1, h2, h3, h4, h5, h6, .HyperMD-header, .cm-line, li, td, th, pre, code) {
+  line-height: var(--swp-lh);
+  letter-spacing: 0;
+  font-family: var(--swp-font-mono);
+}
+
+/* Reading view: blocks are one line apart, headings one line below
+   the previous block (margins collapse through Obsidian's .el-* divs) */
+body.swp-style-terminal .markdown-preview-view :is(p, ul, ol, pre, blockquote, table, .callout, .math-block, hr) {
+  margin-block: 0 var(--swp-lh);
+}
+body.swp-style-terminal .markdown-preview-view :is(h1, h2, h3, h4, h5, h6) {
+  margin-block: var(--swp-lh) 0;
+  padding-block: 0;
+}
+body.swp-style-terminal .markdown-preview-view :is(ul, ol) :is(ul, ol),
+body.swp-style-terminal .markdown-preview-view :is(.callout-content, blockquote) > :last-child {
+  margin-block-end: 0;
+}
+body.swp-style-terminal .HyperMD-header {
+  padding-block: 0;
+}
+
+/* Code blocks: no top/bottom border, rules painted inside */
+body.swp-style-terminal .markdown-rendered pre {
+  border-block-width: 0;
+  border-radius: 0;
+  padding-block: calc(var(--swp-lh) / 2);
+  box-shadow: inset 0 1px 0 var(--swp-line), inset 0 -1px 0 var(--swp-line);
+}
+
+/* Callouts: same, half a line of padding above and below */
+body.swp-style-terminal .callout {
+  --callout-padding: calc(var(--swp-lh) / 2) 2ch;
+  --callout-title-padding: 0;
+  --callout-content-padding: 0;
+  border-block-width: 0;
+  border-radius: 0;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--swp-callout-c, rgb(var(--callout-color))) 40%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, var(--swp-callout-c, rgb(var(--callout-color))) 40%, transparent);
+}
+body.swp-style-terminal.swp-callout-flat .callout,
+body.swp-style-terminal.swp-callout-leftbar .callout {
+  box-shadow: none;
+}
+body.swp-style-terminal.swp-callout-neon .callout {
+  box-shadow:
+    inset 0 1px 0 var(--swp-callout-c, rgb(var(--callout-color))),
+    inset 0 -1px 0 var(--swp-callout-c, rgb(var(--callout-color))),
+    0 0 8px color-mix(in srgb, var(--swp-callout-c, rgb(var(--callout-color))) 45%, transparent);
+}
+body.swp-style-terminal .callout-title {
+  line-height: var(--swp-lh);
+}
+body.swp-style-terminal .callout-content > :first-child {
+  margin-block-start: 0;
+}
+
+/* Tables: vertical borders are fine (no height); horizontal ones are
+   painted as a 1px gradient at the bottom of each cell */
+body.swp-style-terminal .markdown-rendered :is(td, th) {
+  padding-block: 0;
+  border-block: 0;
+  border-inline: 1px solid var(--table-border-color, var(--swp-line));
+  background-image: linear-gradient(to top, var(--table-border-color, var(--swp-line)) 1px, transparent 1px);
+}
+body.swp-style-terminal .markdown-rendered table {
+  border: 0;
+}
+
+/* Horizontal rule: exactly one line tall, rule drawn in the middle */
+body.swp-style-terminal .markdown-rendered hr {
+  border: 0;
+  height: var(--swp-lh);
+  background: linear-gradient(var(--hr-color), var(--hr-color)) center / 100% 1px no-repeat;
 }
 
 /* =========================================================

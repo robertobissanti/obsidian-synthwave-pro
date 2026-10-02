@@ -14,7 +14,7 @@ An Obsidian theme with a **VaporWave / RetroWave** vibe, built for people who sp
 - **Neon used sparingly** — accents reserved for headings, links, focus and syntax highlighting. Body copy stays calm.
 - **WCAG AA contrast** on body text.
 - **Optional retro effects** (glow, perspective grid, CRT scanlines): all off by default, toggle from Style Settings.
-- **Programmer feel**: monospace headings by default, `#`/`##` prefixes on titles, code blocks with neon left border, monospaced status bar.
+- **Programmer feel**: monospace headings by default, `#`/`##` prefixes on titles, code blocks with neon left border, monospaced status bar. The **Terminal** text style puts every line of your notes on a fixed monospace grid, like a terminal window.
 
 ## Installation
 
@@ -30,19 +30,19 @@ The theme uses `color-mix()`, which needs a recent Obsidian installer (Chromium 
 
 | Section | Options |
 |---|---|
-| **Palette** | Synthwave (default) · Outrun · Miami · Tokyo Night · Soft Reading |
-| **Background depth** | Deep · Medium · Soft |
-| **Effects** | Retro grid · Neon glow · CRT scanlines · Dim images in dark mode (all off by default) |
-| **Typography** | Monospace headings · text, interface, heading and mono fonts · optional font size override (by default Obsidian's own Font size slider applies) · line-height · bold weight · code size · readable line width · paragraph spacing · H1–H6 sizes |
-| **Compact headings** | Headings at body size, bold, colored, with their `#` marks and a background band (tinted per level, single color or none) |
-| **Callouts** | Style (Default · Flat · Left bar · Neon · Terminal) · palette colors · corner radius · border width · background intensity · title weight / uppercase · hide icons |
-| **Custom colors** | Start from a palette and override single colors: accents, backgrounds, text, H1–H4, links, tags, highlight, bold, italic |
+| **Palette** | Synthwave (default) · Outrun · Miami · Tokyo Night · Soft Reading · background depth (Deep · Medium · Soft) |
+| **Typography** | Text style: Classic (monospace headings) · Clean · Terminal (all monospace on a fixed line grid) · text and monospace fonts · line height · bold weight · readable line width |
+| **Headings** | Large or Compact (text size, bold, colored, with a background band) · `#` before headings · heading size · band color and intensity |
+| **Images** | Dim images in dark mode · brightness |
+| **Effects** | Neon glow · retro grid · CRT scanlines (all off by default) |
+| **Callouts** | Style (Thin border · Flat · Left bar · Neon · Terminal) · palette colors · title · hide icons · corner radius · background intensity |
+| **Advanced** | Override Obsidian's font size · custom colors on top of the palette (accents, backgrounds, text, headings, links, tags, highlight) |
 
 ### Usage hints
 
 - **Long coding sessions** → `Tokyo Night` or `Soft Reading` palette, glow off, depth medium.
 - **Maximum retrowave vibe** → `Synthwave` + grid on + glow on (mind the headache after an hour).
-- **Long reading** → `Soft Reading`, line-height 1.7, mono headings off.
+- **Long reading** → `Soft Reading`, line-height 1.7, text style Clean.
 
 ## Structure
 

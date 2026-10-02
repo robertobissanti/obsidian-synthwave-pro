@@ -14,7 +14,7 @@ Tema Obsidian con vibe **VaporWave / RetroWave**, pensato per chi passa molte or
 - **Neon usato con parsimonia** — accenti riservati a heading, link, focus, syntax highlighting. Il body resta calmo.
 - **Contrasto WCAG AA** sul testo principale.
 - **Effetti retro opzionali** (glow, griglia prospettica, scanline CRT): tutti disattivati di default, attivabili da Style Settings.
-- **Vibe da programmazione**: heading monospace di default, prefissi `#`, `##` davanti ai titoli, code block con bordo neon, status bar in monospaced.
+- **Vibe da programmazione**: heading monospace di default, prefissi `#`, `##` davanti ai titoli, code block con bordo neon, status bar in monospaced. Lo stile di testo **Terminal** mette ogni riga delle note su una griglia monospace fissa, come in una finestra di terminale.
 
 ## Installazione
 
@@ -30,19 +30,19 @@ Il tema usa `color-mix()`, che richiede un installer di Obsidian recente (Chromi
 
 | Sezione | Opzioni |
 |---|---|
-| **Palette** | Synthwave (default) · Outrun · Miami · Tokyo Night · Soft Reading |
-| **Background depth** | Deep · Medium · Soft |
-| **Effetti** | Retro grid · Neon glow · CRT scanlines · Attenuazione immagini in dark mode (tutti off di default) |
-| **Tipografia** | Heading monospace · font del testo, dell'interfaccia, degli heading e mono · dimensione del font opzionale (di default vale lo slider Font size di Obsidian) · interlinea · peso del grassetto · dimensione del codice · larghezza di lettura · spaziatura paragrafi · dimensioni H1–H6 |
-| **Heading compatti** | Heading alla dimensione del testo, in grassetto, colorati, con i `#` e una banda di sfondo (tinta per livello, colore unico o nessuna) |
-| **Callout** | Stile (Default · Flat · Left bar · Neon · Terminal) · colori dalla palette · raggio · spessore del bordo · intensità dello sfondo · titolo normale / maiuscolo · icone nascoste |
-| **Colori personalizzati** | Parti da una palette e cambia solo i colori che vuoi: accenti, sfondi, testo, H1–H4, link, tag, evidenziazione, grassetto, corsivo |
+| **Palette** | Synthwave (default) · Outrun · Miami · Tokyo Night · Soft Reading · profondità dello sfondo (Deep · Medium · Soft) |
+| **Typography** | Stile del testo: Classic (heading monospace) · Clean · Terminal (tutto monospace su una griglia di righe fissa) · font del testo e monospace · interlinea · peso del grassetto · larghezza di lettura |
+| **Headings** | Large o Compact (dimensione del testo, grassetto, colorati, con banda di sfondo) · `#` prima degli heading · dimensione degli heading · colore e intensità della banda |
+| **Images** | Attenuazione delle immagini in dark mode · luminosità |
+| **Effects** | Neon glow · retro grid · CRT scanlines (tutti off di default) |
+| **Callouts** | Stile (Thin border · Flat · Left bar · Neon · Terminal) · colori dalla palette · titolo · icone nascoste · raggio · intensità dello sfondo |
+| **Advanced** | Sostituire la dimensione del font di Obsidian · colori personalizzati sopra la palette (accenti, sfondi, testo, heading, link, tag, evidenziazione) |
 
 ### Suggerimenti d'uso
 
 - **Sessioni di codice lunghe** → palette `Tokyo Night` o `Soft Reading`, glow off, depth medium.
 - **Vibe massima retrowave** → `Synthwave` + grid on + glow on (occhio al mal di testa dopo un'ora).
-- **Lettura prolungata di note** → `Soft Reading`, line-height 1.7, mono headings off.
+- **Lettura prolungata di note** → `Soft Reading`, line-height 1.7, stile del testo Clean.
 
 ## Struttura
 

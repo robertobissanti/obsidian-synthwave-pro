@@ -9,6 +9,9 @@ Piano delle prossime modifiche.
 - [ ] in Live Preview i `#` degli heading compatti compaiono una sola volta, sia sulla riga col cursore sia sulle altre;
 - [ ] le scanlines non coprono il visualizzatore immagini su mobile né i lightbox dei plugin; un'immagine aperta in una scheda propria ha ancora le scanlines (non risolto);
 - [ ] stili dei callout e heading compatti in tutte le palette, dark e light.
+- [ ] stile di testo Terminal: in Reading view e Live Preview ogni blocco parte su una riga della griglia (testo, liste, codice, callout, tabelle, linee orizzontali); le immagini restano l'unica eccezione nota.
+
+**Riordino Style Settings (2026-10-02):** sezioni Palette, Typography, Headings, Images, Effects, Callouts, Advanced. Rimosse le opzioni font dell'interfaccia, font degli heading, dimensione del codice, spaziatura paragrafi, spessore bordo callout, colori di grassetto e corsivo, dimensioni H1…H6 (sostituite da un unico "Heading size"). "Monospace headings" è diventato "Text style" (Classic = come prima, Clean, Terminal). Chi aveva spento "Monospace headings" torna a Classic: da segnalare nelle note di rilascio.
 Versione corrente: `1.0.1`. Versione prevista per questo blocco di lavoro: **`1.1.0`** (nuove funzioni, nessuna rottura delle impostazioni esistenti).
 
 ## 1. Richieste degli utenti dal thread Reddit
