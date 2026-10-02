@@ -30,7 +30,7 @@ The theme uses `color-mix()`, which needs a recent Obsidian installer (Chromium 
 
 | Section | Options |
 |---|---|
-| **Palette** | Synthwave (default) · Outrun · Miami · Tokyo Night · Soft Reading · background depth (Deep · Medium · Soft) |
+| **Palette** | Synthwave (default) · Outrun · Miami · Tokyo Night · Soft Reading · Catppuccin Frappé, Macchiato, Mocha (Latte in light mode) · background depth (Deep · Medium · Soft) |
 | **Typography** | Text style: Classic (monospace headings) · Clean · Terminal (all monospace on a fixed line grid) · text and monospace fonts · line height · bold weight · readable line width |
 | **Headings** | Large or Compact (text size, bold, colored, with a background band) · `#` before headings · heading size · band color and intensity |
 | **Images** | Dim images in dark mode · brightness |
@@ -213,6 +213,8 @@ Issues, ideas and PRs are welcome on [github.com/robertobissanti/obsidian-synthw
 ### Credits
 
 - Visual inspiration: [Obsidian SynthWave](https://github.com/marcoluzi/obsidian-synthwave) by [Marco Luzi](https://github.com/marcoluzi).
+- The Catppuccin palettes use the official colors of [Catppuccin](https://github.com/catppuccin/catppuccin) (MIT License, © 2021 Catppuccin).
+- Terminal text style: line-grid technique from [Stéphan Zych](https://stephan.zych.be/blog/terminal-style-site-lit-eleventy/).
 
 ### Third-party assets
 

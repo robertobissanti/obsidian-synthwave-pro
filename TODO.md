@@ -292,3 +292,8 @@ Da `/notes/studio-tema-e-regole-obsidian.md` nei file del progetto:
 - [x] Heading compatti nell'editor più alti di una riga e disallineati dai numeri di riga: Obsidian aggiunge `padding-top: var(--p-spacing)` alle righe heading, finito dentro la banda. Azzerato con Compact headings.
 - [x] Titolo della nota (inline title) proporzionale: in Classic e Terminal ora usa il font monospace come gli heading.
 - [ ] Verificare se serve alzare `minAppVersion` alla versione di Obsidian che ha cambiato il formato di `--callout-color`.
+
+## Palette Catppuccin (2026-10-02)
+
+- [x] Aggiunte Catppuccin Frappé, Macchiato e Mocha (in light mode tutte e tre usano Latte), colori ufficiali da `catppuccin/palette` (`palette.json`). Mappatura: crust/base/mantle/surface0 per gli sfondi, surface1 per le linee, text/subtext0/overlay0 per il testo, mauve/blue/pink/yellow come accenti, green/peach/red per successo/avviso/errore. Credito MIT nei README.
+- [x] Background depth ora usa i toni della palette attiva: prima Deep e Soft in dark mode avevano valori fissi di Synthwave e davano sfondi sbagliati alle altre palette.

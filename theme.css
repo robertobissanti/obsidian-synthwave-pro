@@ -44,6 +44,15 @@ settings:
       -
         label: Soft Reading (low saturation, easy on the eyes)
         value: swp-palette-soft
+      -
+        label: Catppuccin Frappé (light mode uses Latte)
+        value: swp-palette-ctp-frappe
+      -
+        label: Catppuccin Macchiato (light mode uses Latte)
+        value: swp-palette-ctp-macchiato
+      -
+        label: Catppuccin Mocha (light mode uses Latte)
+        value: swp-palette-ctp-mocha
 
   -
     id: swp-bg-depth
@@ -628,29 +637,6 @@ body {
   --pre-code-font: var(--swp-font-mono);
 }
 
-/* Custom colors: start from the palette, override single elements.
-   Each --swp-c-* is written by Style Settings only for colors the user set;
-   unset ones fall back to the palette value. */
-body.swp-custom-colors {
-  --swp-bg-1:     var(--swp-c-bg-1, var(--swp-p-bg-1));
-  --swp-bg-2:     var(--swp-c-bg-2, var(--swp-p-bg-2));
-  --swp-text:     var(--swp-c-text, var(--swp-p-text));
-  --swp-muted:    var(--swp-c-muted, var(--swp-p-muted));
-  --swp-accent-1: var(--swp-accent-primary, var(--swp-p-accent-1));
-  --swp-accent-2: var(--swp-accent-secondary, var(--swp-p-accent-2));
-  --swp-accent-3: var(--swp-c-accent-3, var(--swp-p-accent-3));
-  --swp-accent-4: var(--swp-c-accent-4, var(--swp-p-accent-4));
-
-  --h1-color: var(--swp-c-h1, var(--swp-accent-1));
-  --h2-color: var(--swp-c-h2, var(--swp-accent-2));
-  --h3-color: var(--swp-c-h3, var(--swp-accent-3));
-  --h4-color: var(--swp-c-h4, var(--swp-accent-4));
-  --link-color: var(--swp-c-link, var(--swp-accent-2));
-  --tag-color:  var(--swp-c-tag, var(--swp-accent-3));
-  --tag-background: color-mix(in srgb, var(--swp-c-tag, var(--swp-accent-3)) 18%, transparent);
-  --text-highlight-bg: color-mix(in srgb, var(--swp-c-highlight, var(--swp-accent-4)) 35%, transparent);
-}
-
 /* =========================================================
    2. PALETTE — Synthwave (default)
    Each palette overrides --swp-* tokens, then maps to Obsidian.
@@ -746,6 +732,63 @@ body.swp-custom-colors {
   --swp-p-success: #8ec9b3;
   --swp-p-warning: #d6a87a;
   --swp-p-error:   #d68a9c;
+}
+
+/* Catppuccin (https://github.com/catppuccin/catppuccin, MIT).
+   Official colors from catppuccin/palette. Each dark flavor pairs with
+   Latte in light mode. */
+.theme-dark.swp-palette-ctp-frappe {
+  --swp-p-bg-0: #232634;  /* crust */
+  --swp-p-bg-1: #303446;  /* base */
+  --swp-p-bg-2: #292c3c;  /* mantle */
+  --swp-p-bg-3: #414559;  /* surface0 */
+  --swp-p-line: #51576d;  /* surface1 */
+  --swp-p-text: #c6d0f5;  /* text */
+  --swp-p-muted: #a5adce;  /* subtext0 */
+  --swp-p-faint: #737994;  /* overlay0 */
+  --swp-p-accent-1: #ca9ee6;  /* mauve */
+  --swp-p-accent-2: #8caaee;  /* blue */
+  --swp-p-accent-3: #f4b8e4;  /* pink */
+  --swp-p-accent-4: #e5c890;  /* yellow */
+  --swp-p-success: #a6d189;  /* green */
+  --swp-p-warning: #ef9f76;  /* peach */
+  --swp-p-error: #e78284;  /* red */
+}
+
+.theme-dark.swp-palette-ctp-macchiato {
+  --swp-p-bg-0: #181926;  /* crust */
+  --swp-p-bg-1: #24273a;  /* base */
+  --swp-p-bg-2: #1e2030;  /* mantle */
+  --swp-p-bg-3: #363a4f;  /* surface0 */
+  --swp-p-line: #494d64;  /* surface1 */
+  --swp-p-text: #cad3f5;  /* text */
+  --swp-p-muted: #a5adcb;  /* subtext0 */
+  --swp-p-faint: #6e738d;  /* overlay0 */
+  --swp-p-accent-1: #c6a0f6;  /* mauve */
+  --swp-p-accent-2: #8aadf4;  /* blue */
+  --swp-p-accent-3: #f5bde6;  /* pink */
+  --swp-p-accent-4: #eed49f;  /* yellow */
+  --swp-p-success: #a6da95;  /* green */
+  --swp-p-warning: #f5a97f;  /* peach */
+  --swp-p-error: #ed8796;  /* red */
+}
+
+.theme-dark.swp-palette-ctp-mocha {
+  --swp-p-bg-0: #11111b;  /* crust */
+  --swp-p-bg-1: #1e1e2e;  /* base */
+  --swp-p-bg-2: #181825;  /* mantle */
+  --swp-p-bg-3: #313244;  /* surface0 */
+  --swp-p-line: #45475a;  /* surface1 */
+  --swp-p-text: #cdd6f4;  /* text */
+  --swp-p-muted: #a6adc8;  /* subtext0 */
+  --swp-p-faint: #6c7086;  /* overlay0 */
+  --swp-p-accent-1: #cba6f7;  /* mauve */
+  --swp-p-accent-2: #89b4fa;  /* blue */
+  --swp-p-accent-3: #f5c2e7;  /* pink */
+  --swp-p-accent-4: #f9e2af;  /* yellow */
+  --swp-p-success: #a6e3a1;  /* green */
+  --swp-p-warning: #fab387;  /* peach */
+  --swp-p-error: #f38ba8;  /* red */
 }
 
 /* =========================================================
@@ -846,14 +889,60 @@ body.swp-custom-colors {
   --swp-p-error:    #9a4a5e;
 }
 
+/* Catppuccin Latte, light counterpart of all three dark flavors */
+.theme-light.swp-palette-ctp-frappe,
+.theme-light.swp-palette-ctp-macchiato,
+.theme-light.swp-palette-ctp-mocha {
+  --swp-p-bg-0: #dce0e8;  /* crust */
+  --swp-p-bg-1: #eff1f5;  /* base */
+  --swp-p-bg-2: #e6e9ef;  /* mantle */
+  --swp-p-bg-3: #ccd0da;  /* surface0 */
+  --swp-p-line: #bcc0cc;  /* surface1 */
+  --swp-p-text: #4c4f69;  /* text */
+  --swp-p-muted: #6c6f85;  /* subtext0 */
+  --swp-p-faint: #9ca0b0;  /* overlay0 */
+  --swp-p-accent-1: #8839ef;  /* mauve */
+  --swp-p-accent-2: #1e66f5;  /* blue */
+  --swp-p-accent-3: #ea76cb;  /* pink */
+  --swp-p-accent-4: #df8e1d;  /* yellow */
+  --swp-p-success: #40a02b;  /* green */
+  --swp-p-warning: #fe640b;  /* peach */
+  --swp-p-error: #d20f39;  /* red */
+}
+
 /* =========================================================
    3. BACKGROUND DEPTH MODIFIERS
    ========================================================= */
-.theme-dark.swp-bg-deep   { --swp-p-bg-1: var(--swp-p-bg-0); --swp-p-bg-2: #1a1530; }
-.theme-dark.swp-bg-soft   { --swp-p-bg-1: #221a3d; --swp-p-bg-2: #2c224d; --swp-p-bg-0: #1a1530; }
+/* Applied to the effective tokens and expressed in the active palette's
+   own steps, so every palette (not only Synthwave) gets the right shades. */
+body.theme-dark.swp-bg-deep  { --swp-bg-1: var(--swp-p-bg-0); --swp-bg-2: var(--swp-p-bg-1); }
+body.theme-dark.swp-bg-soft  { --swp-bg-0: var(--swp-p-bg-1); --swp-bg-1: var(--swp-p-bg-2); --swp-bg-2: var(--swp-p-bg-3); }
 
-.theme-light.swp-bg-deep  { --swp-p-bg-1: var(--swp-p-bg-0); }
-.theme-light.swp-bg-soft  { --swp-p-bg-1: #ffffff; --swp-p-bg-0: var(--swp-p-bg-2); }
+body.theme-light.swp-bg-deep { --swp-bg-1: var(--swp-p-bg-0); }
+body.theme-light.swp-bg-soft { --swp-bg-1: #ffffff; --swp-bg-0: var(--swp-p-bg-2); }
+
+/* Custom colors: start from the palette, override single elements.
+   Each --swp-c-* is written by Style Settings only for colors the user set;
+   unset ones fall back to the palette value. */
+body:is(.theme-dark, .theme-light).swp-custom-colors {
+  --swp-bg-1:     var(--swp-c-bg-1, var(--swp-p-bg-1));
+  --swp-bg-2:     var(--swp-c-bg-2, var(--swp-p-bg-2));
+  --swp-text:     var(--swp-c-text, var(--swp-p-text));
+  --swp-muted:    var(--swp-c-muted, var(--swp-p-muted));
+  --swp-accent-1: var(--swp-accent-primary, var(--swp-p-accent-1));
+  --swp-accent-2: var(--swp-accent-secondary, var(--swp-p-accent-2));
+  --swp-accent-3: var(--swp-c-accent-3, var(--swp-p-accent-3));
+  --swp-accent-4: var(--swp-c-accent-4, var(--swp-p-accent-4));
+
+  --h1-color: var(--swp-c-h1, var(--swp-accent-1));
+  --h2-color: var(--swp-c-h2, var(--swp-accent-2));
+  --h3-color: var(--swp-c-h3, var(--swp-accent-3));
+  --h4-color: var(--swp-c-h4, var(--swp-accent-4));
+  --link-color: var(--swp-c-link, var(--swp-accent-2));
+  --tag-color:  var(--swp-c-tag, var(--swp-accent-3));
+  --tag-background: color-mix(in srgb, var(--swp-c-tag, var(--swp-accent-3)) 18%, transparent);
+  --text-highlight-bg: color-mix(in srgb, var(--swp-c-highlight, var(--swp-accent-4)) 35%, transparent);
+}
 
 /* =========================================================
    5. TYPOGRAPHY
