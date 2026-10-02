@@ -35,7 +35,7 @@ The theme uses `color-mix()`, which needs a recent Obsidian installer (Chromium 
 | **Headings** | Large or Compact (text size, bold, colored, with a background band) · `#` before headings · heading size · band color and intensity |
 | **Images** | Dim images in dark mode · brightness |
 | **Effects** | Neon glow · retro grid · CRT scanlines (all off by default) |
-| **Callouts** | Style (Thin border · Flat · Left bar · Neon · Terminal) · palette colors · title · hide icons · corner radius · background intensity |
+| **Callouts** | Style (Thin border · Flat · Left bar · Neon · Dashed monospace) · palette colors · title · hide icons · corner radius · background intensity |
 | **Advanced** | Override Obsidian's font size · custom colors on top of the palette (accents, backgrounds, text, headings, links, tags, highlight) |
 
 ### Usage hints

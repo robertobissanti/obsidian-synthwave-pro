@@ -35,7 +35,7 @@ Il tema usa `color-mix()`, che richiede un installer di Obsidian recente (Chromi
 | **Headings** | Large o Compact (dimensione del testo, grassetto, colorati, con banda di sfondo) · `#` prima degli heading · dimensione degli heading · colore e intensità della banda |
 | **Images** | Attenuazione delle immagini in dark mode · luminosità |
 | **Effects** | Neon glow · retro grid · CRT scanlines (tutti off di default) |
-| **Callouts** | Stile (Thin border · Flat · Left bar · Neon · Terminal) · colori dalla palette · titolo · icone nascoste · raggio · intensità dello sfondo |
+| **Callouts** | Stile (Thin border · Flat · Left bar · Neon · Dashed monospace) · colori dalla palette · titolo · icone nascoste · raggio · intensità dello sfondo |
 | **Advanced** | Sostituire la dimensione del font di Obsidian · colori personalizzati sopra la palette (accenti, sfondi, testo, heading, link, tag, evidenziazione) |
 
 ### Suggerimenti d'uso
