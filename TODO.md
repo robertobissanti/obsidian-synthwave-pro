@@ -5,17 +5,76 @@ Versione corrente: `1.0.1`. Versione prevista per questo blocco di lavoro: **`1.
 
 ## 1. Richieste degli utenti dal thread Reddit
 
-Fonte: https://www.reddit.com/r/ObsidianMD/s/PBG2w1IGQx
+Fonte: https://www.reddit.com/r/ObsidianMD/s/PBG2w1IGQx (commenti di u/Key-Concept-7001; u/rob-bix è l'autore del tema). Tutte le opzioni nuove vanno in Style Settings e sono spente o neutre di default, così chi usa già il tema non vede cambiamenti.
 
-> Da completare. Il thread non è stato leggibile dall'ambiente in cui è stato scritto questo piano (Reddit blocca l'accesso). Le issue GitHub del repo sono a zero, quindi non ci sono altre richieste registrate.
+### R-1 Più controllo sulla tipografia
 
-Per ogni commento del thread aggiungere una voce con questo formato:
+> "I like to customize typography in a theme, including the font size."
 
-- [ ] **R-n — titolo breve** (utente u/…, link al commento)
-  - Richiesta: cosa chiede, con parole sue.
-  - Dove nel CSS: sezione di `theme.css` coinvolta.
-  - Approccio: nuova opzione Style Settings o modifica di default.
-  - Impatto sulla versione: patch (fix) o minor (nuova opzione).
+Oggi esistono già font del testo, font mono, dimensione base e interlinea, ma stanno in una sezione chiusa chiamata "Heading section", che sembra riguardare gli heading. Probabile che l'utente non le abbia trovate.
+
+- [ ] Rinominare il titolo della sezione in "Typography" (solo `title`, l'id `swp-fonts-heading` resta uguale per non perdere le impostazioni) e aprirla di default (`collapsed: false`).
+- [ ] Aggiungere `variable-text` per il font dell'interfaccia (`--font-interface-theme`, oggi uguale al testo) e per il font degli heading (`--swp-font-heading`, usato anche da "Monospace headings").
+- [ ] Aggiungere slider per: dimensione di ciascun heading h1-h6 in `em` (mappati su `--h1-size` … `--h6-size`), peso del testo (`--font-weight`), peso del grassetto (`--bold-weight`), dimensione del codice (`--code-size`), larghezza di lettura (`--file-line-width`), spaziatura tra paragrafi (`--p-spacing`), dimensione dell'interfaccia (`--font-ui-small` / `--font-ui-medium`).
+- [ ] Controllare che gli slider degli heading non entrino in conflitto con "Compact headings" (sez. 2): con l'opzione attiva le dimensioni restano a `1em`.
+
+### R-2 Attenuare le immagini (image dimming)
+
+> "Some themes let you dim images. Since you find screen comfort important it's worth adding."
+
+- [ ] `class-toggle` `swp-dim-images` (default off) e slider `swp-image-dim` (luminosità, default 80%, range 50-100%).
+- [ ] CSS, solo in dark mode:
+  ```css
+  body.theme-dark.swp-dim-images :is(.markdown-rendered, .markdown-source-view) img {
+    filter: brightness(var(--swp-image-dim, 80%));
+    transition: filter .2s;
+  }
+  body.theme-dark.swp-dim-images :is(.markdown-rendered, .markdown-source-view) img:hover {
+    filter: none;
+  }
+  ```
+- [ ] Opzione facoltativa: attenuare anche i video e gli embed PDF.
+- [ ] Il ripristino al passaggio del mouse non esiste su mobile: verificare che l'immagine aperta a schermo intero non resti scura.
+
+### R-3 Colori scelti dall'utente sopra la palette
+
+> "Let the user choose their own colors, overriding the palette choice. They can start with a palette and then override individual elements if they want to."
+
+Bug da sistemare insieme: le impostazioni "Override primary accent" e "Override secondary accent" esistono già nel blocco `@settings`, ma nessuna regola CSS usa `--swp-accent-primary` o `--swp-accent-secondary`, quindi oggi non hanno alcun effetto.
+
+- [ ] Separare i valori della palette da quelli effettivi. Le palette definiscono `--swp-p-accent-1`, `--swp-p-bg-1` ecc., e il tema usa `--swp-accent-1: var(--swp-c-accent-1, var(--swp-p-accent-1))`. Se l'utente imposta un colore, Style Settings scrive `--swp-c-…` e vince; se lo azzera, torna quello della palette.
+- [ ] Verificare se Style Settings scrive la variabile anche quando il valore è quello di default. Se sì, serve un `class-toggle` "Use custom colors" e le regole di override valgono solo con quella classe.
+- [ ] Elementi da rendere personalizzabili (`variable-themed-color`, dark e light separati): 4 accenti, sfondo editor, sfondo sidebar, testo, testo attenuato, link, tag, evidenziazione, colori h1-h6, grassetto, corsivo, codice inline.
+- [ ] Sostituire le due impostazioni esistenti con le nuove, mantenendo gli id `swp-accent-primary` e `swp-accent-secondary` per chi li ha già impostati.
+- [ ] Nel README spiegare il flusso: scegli una palette, poi cambia solo i colori che vuoi.
+
+### R-4 CRT scanlines spente sulle immagini a schermo intero
+
+> "When CRT scan lines is on, consider switching that off when the image is full screen after clicking or tapping."
+
+Oggi le scanlines sono un `body::after` fisso con `z-index: 9999`, quindi stanno sopra tutto, compresi modali e lightbox delle immagini.
+
+- [ ] Spostare l'overlay dal `body` a `.workspace` (o `.app-container`). Modali, lightbox dei plugin e visualizzatore immagini su mobile vengono aggiunti al `body` fuori da `.workspace`, quindi finiscono sopra le scanlines.
+- [ ] Per un'immagine aperta in una scheda propria (`.workspace-leaf-content[data-type="image"]`), applicare le scanlines per singola scheda (`.workspace-leaf-content:not([data-type="image"])::after` con `position: absolute`) invece che su tutta la finestra. Valutare se questa resa per scheda è da preferire in ogni caso.
+- [ ] Provare con il visualizzatore immagini di Obsidian mobile e con i plugin di zoom più diffusi (Image Toolkit, Mousewheel Image Zoom).
+- [ ] Niente `:has()` (sconsigliato dalle linee guida Obsidian).
+
+### R-5 Più opzioni di design per i callout
+
+> "I use callouts a lot. A few design options would make the theme more interesting."
+
+Oggi i callout hanno solo raggio di 8px, bordo al 40% del colore e due tipi ridisegnati (IMPORTANT, CAUTION).
+
+- [ ] `class-select` "Callout style":
+  - Default (attuale)
+  - Flat (niente bordo, solo sfondo)
+  - Left bar (barra spessa a sinistra, sfondo leggero)
+  - Neon (bordo con `box-shadow` del colore del callout, coerente con "Neon glow")
+  - Terminal (font mono, titolo in maiuscolo con prefisso `>`)
+- [ ] Slider per raggio degli angoli, intensità dello sfondo (`color-mix` con `rgb(var(--callout-color))`) e spessore del bordo.
+- [ ] Toggle "Callout colors from palette": mappa i tipi principali (note, tip, warning, danger, quote…) sugli accenti `--swp-accent-*` invece dei colori standard di Obsidian.
+- [ ] Opzioni per il titolo: grassetto o normale, maiuscolo, icona nascosta.
+- [ ] Controllare contrasto e leggibilità in tutte le palette, dark e light, anche per i callout ripiegabili e annidati.
 
 ## 2. Nuova opzione: heading compatti ("compact headings")
 
@@ -196,4 +255,4 @@ Da `/notes/studio-tema-e-regole-obsidian.md` nei file del progetto:
 5. Creare la release GitHub con tag `1.1.0` e allegare `manifest.json` e `theme.css`.
 6. Su community.obsidian.md, pagina del tema: "Check for new releases" e controllare l'esito della review automatica.
 7. `versions.json` non serve ai temi.
-8. Rispondere sul thread Reddit con le novità.
+8. Rispondere sul thread Reddit (u/Key-Concept-7001) con le novità.
