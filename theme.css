@@ -86,6 +86,24 @@ settings:
     default: false
 
   -
+    id: swp-dim-images
+    title: Dim images (dark mode)
+    description: Lowers image brightness for eye comfort. Hover an image to see it at full brightness.
+    type: class-toggle
+    default: false
+
+  -
+    id: swp-image-dim
+    title: Image brightness (%)
+    description: Used when "Dim images" is on.
+    type: variable-number-slider
+    default: 80
+    format: '{}%'
+    min: 40
+    max: 100
+    step: 5
+
+  -
     id: swp-mono-headings
     title: Monospace headings
     description: Use a coding font for headings (programmer vibe).
@@ -94,15 +112,31 @@ settings:
 
   -
     id: swp-fonts-heading
-    title: Heading section
+    title: Typography
     type: heading
     level: 3
-    collapsed: true
+    collapsed: false
 
   -
     id: swp-font-text
     title: Text font
     description: Body text font family. Comma-separated list, no surrounding quotes.
+    type: variable-text
+    quotes: false
+    default: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
+
+  -
+    id: swp-font-interface
+    title: Interface font
+    description: Font for menus, sidebars and tabs. Leave as is to use the text font.
+    type: variable-text
+    quotes: false
+    default: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
+
+  -
+    id: swp-font-heading
+    title: Heading font
+    description: Font for headings when "Monospace headings" is off.
     type: variable-text
     quotes: false
     default: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
@@ -116,8 +150,16 @@ settings:
     default: "'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, Consolas, monospace"
 
   -
+    id: swp-override-font-size
+    title: Override Obsidian font size
+    description: Off = use Settings → Appearance → Font size (recommended). On = use the slider below instead.
+    type: class-toggle
+    default: false
+
+  -
     id: swp-font-size
     title: Base font size (px)
+    description: Only used when "Override Obsidian font size" is on.
     type: variable-number-slider
     default: 16
     format: '{}px'
@@ -135,29 +177,411 @@ settings:
     step: 0.05
 
   -
-    id: swp-accent-section
-    title: Custom accents
+    id: bold-weight
+    title: Bold weight
+    type: variable-number-slider
+    default: 600
+    min: 500
+    max: 900
+    step: 100
+
+  -
+    id: code-size
+    title: Code font size (em)
+    type: variable-number-slider
+    default: 0.875
+    format: '{}em'
+    min: 0.7
+    max: 1.1
+    step: 0.025
+
+  -
+    id: file-line-width
+    title: Readable line width (px)
+    description: Used when Obsidian's "Readable line length" is on.
+    type: variable-number-slider
+    default: 700
+    format: '{}px'
+    min: 500
+    max: 1200
+    step: 20
+
+  -
+    id: p-spacing
+    title: Paragraph spacing (rem)
+    type: variable-number-slider
+    default: 1
+    format: '{}rem'
+    min: 0.25
+    max: 2
+    step: 0.25
+
+  -
+    id: h1-size
+    title: H1 size (em)
+    type: variable-number-slider
+    default: 1.802
+    format: '{}em'
+    min: 0.8
+    max: 3
+    step: 0.05
+
+  -
+    id: h2-size
+    title: H2 size (em)
+    type: variable-number-slider
+    default: 1.602
+    format: '{}em'
+    min: 0.8
+    max: 3
+    step: 0.05
+
+  -
+    id: h3-size
+    title: H3 size (em)
+    type: variable-number-slider
+    default: 1.424
+    format: '{}em'
+    min: 0.8
+    max: 3
+    step: 0.05
+
+  -
+    id: h4-size
+    title: H4 size (em)
+    type: variable-number-slider
+    default: 1.266
+    format: '{}em'
+    min: 0.8
+    max: 3
+    step: 0.05
+
+  -
+    id: h5-size
+    title: H5 size (em)
+    type: variable-number-slider
+    default: 1.125
+    format: '{}em'
+    min: 0.8
+    max: 3
+    step: 0.05
+
+  -
+    id: h6-size
+    title: H6 size (em)
+    type: variable-number-slider
+    default: 1
+    format: '{}em'
+    min: 0.8
+    max: 3
+    step: 0.05
+
+  -
+    id: swp-headings-section
+    title: Compact headings
     type: heading
     level: 3
     collapsed: true
 
   -
-    id: swp-accent-primary
-    title: Override primary accent
-    description: Leave empty to use palette default.
+    id: swp-compact-headings
+    title: Compact headings
+    description: Headings use the body font size, stay bold and colored, keep their leading # marks and sit on a background band. Overrides the H1-H6 sizes above.
+    type: class-toggle
+    default: false
+
+  -
+    id: swp-heading-band
+    title: Heading band color
+    type: class-select
+    default: swp-band-tinted
+    allowEmpty: false
+    options:
+      -
+        label: Tinted by heading level (default)
+        value: swp-band-tinted
+      -
+        label: Single custom color
+        value: swp-band-custom
+      -
+        label: No band
+        value: swp-band-none
+
+  -
+    id: swp-heading-band-strength
+    title: Band intensity (%)
+    description: How much of the heading color is mixed into the band (tinted mode).
+    type: variable-number-slider
+    default: 14
+    format: '{}%'
+    min: 4
+    max: 40
+    step: 1
+
+  -
+    id: swp-heading-band-color
+    title: Custom band color
+    description: Used when "Single custom color" is selected.
     type: variable-themed-color
     format: hex
-    default-light: '#ff3ec8'
+    default-dark: '#2a1f4a'
+    default-light: '#ece6fb'
+    opacity: false
+
+  -
+    id: swp-callout-section
+    title: Callouts
+    type: heading
+    level: 3
+    collapsed: true
+
+  -
+    id: swp-callout-style
+    title: Callout style
+    type: class-select
+    default: swp-callout-default
+    allowEmpty: false
+    options:
+      -
+        label: Default (thin border)
+        value: swp-callout-default
+      -
+        label: Flat (no border)
+        value: swp-callout-flat
+      -
+        label: Left bar
+        value: swp-callout-leftbar
+      -
+        label: Neon (glowing border)
+        value: swp-callout-neon
+      -
+        label: Terminal (monospace, dashed)
+        value: swp-callout-terminal
+
+  -
+    id: swp-callout-palette
+    title: Callout colors from palette
+    description: Color callouts with the palette accents instead of Obsidian's standard colors.
+    type: class-toggle
+    default: false
+
+  -
+    id: swp-callout-radius
+    title: Corner radius (px)
+    type: variable-number-slider
+    default: 8
+    format: '{}px'
+    min: 0
+    max: 20
+    step: 1
+
+  -
+    id: swp-callout-border-width
+    title: Border width (px)
+    type: variable-number-slider
+    default: 1
+    format: '{}px'
+    min: 0
+    max: 4
+    step: 1
+
+  -
+    id: swp-callout-bg-opacity
+    title: Background intensity
+    type: variable-number-slider
+    default: 0.1
+    min: 0
+    max: 0.4
+    step: 0.02
+
+  -
+    id: swp-callout-title-weight
+    title: Callout title
+    type: class-select
+    default: swp-callout-title-bold
+    allowEmpty: false
+    options:
+      -
+        label: Bold (default)
+        value: swp-callout-title-bold
+      -
+        label: Normal weight
+        value: swp-callout-title-normal
+      -
+        label: Uppercase
+        value: swp-callout-title-upper
+
+  -
+    id: swp-callout-hide-icon
+    title: Hide callout icons
+    type: class-toggle
+    default: false
+
+  -
+    id: swp-accent-section
+    title: Custom colors
+    type: heading
+    level: 3
+    collapsed: true
+
+  -
+    id: swp-custom-colors
+    title: Use custom colors
+    description: Start from the palette above, then override only the colors you change below. Turn off to go back to the pure palette.
+    type: class-toggle
+    default: false
+
+  -
+    id: swp-accent-primary
+    title: Primary accent
+    type: variable-themed-color
+    format: hex
     default-dark: '#ff3ec8'
+    default-light: '#c81f8c'
     opacity: false
 
   -
     id: swp-accent-secondary
-    title: Override secondary accent
+    title: Secondary accent
     type: variable-themed-color
     format: hex
-    default-light: '#36e2ec'
     default-dark: '#36e2ec'
+    default-light: '#0d8a94'
+    opacity: false
+
+  -
+    id: swp-c-accent-3
+    title: Third accent
+    type: variable-themed-color
+    format: hex
+    default-dark: '#b56cff'
+    default-light: '#7a3fc8'
+    opacity: false
+
+  -
+    id: swp-c-accent-4
+    title: Fourth accent
+    type: variable-themed-color
+    format: hex
+    default-dark: '#ffd23f'
+    default-light: '#b8860b'
+    opacity: false
+
+  -
+    id: swp-c-bg-1
+    title: Editor background
+    type: variable-themed-color
+    format: hex
+    default-dark: '#1a1530'
+    default-light: '#fbf7ff'
+    opacity: false
+
+  -
+    id: swp-c-bg-2
+    title: Sidebar background
+    type: variable-themed-color
+    format: hex
+    default-dark: '#221a3d'
+    default-light: '#f3edf9'
+    opacity: false
+
+  -
+    id: swp-c-text
+    title: Text
+    type: variable-themed-color
+    format: hex
+    default-dark: '#ece6ff'
+    default-light: '#2a2440'
+    opacity: false
+
+  -
+    id: swp-c-muted
+    title: Muted text
+    type: variable-themed-color
+    format: hex
+    default-dark: '#a89fcf'
+    default-light: '#645a82'
+    opacity: false
+
+  -
+    id: swp-c-h1
+    title: H1
+    type: variable-themed-color
+    format: hex
+    default-dark: '#ff3ec8'
+    default-light: '#c81f8c'
+    opacity: false
+
+  -
+    id: swp-c-h2
+    title: H2
+    type: variable-themed-color
+    format: hex
+    default-dark: '#36e2ec'
+    default-light: '#0d8a94'
+    opacity: false
+
+  -
+    id: swp-c-h3
+    title: H3
+    type: variable-themed-color
+    format: hex
+    default-dark: '#b56cff'
+    default-light: '#7a3fc8'
+    opacity: false
+
+  -
+    id: swp-c-h4
+    title: H4
+    type: variable-themed-color
+    format: hex
+    default-dark: '#ffd23f'
+    default-light: '#b8860b'
+    opacity: false
+
+  -
+    id: swp-c-link
+    title: Links
+    type: variable-themed-color
+    format: hex
+    default-dark: '#36e2ec'
+    default-light: '#0d8a94'
+    opacity: false
+
+  -
+    id: swp-c-tag
+    title: Tags
+    type: variable-themed-color
+    format: hex
+    default-dark: '#b56cff'
+    default-light: '#7a3fc8'
+    opacity: false
+
+  -
+    id: swp-c-highlight
+    title: Highlight
+    type: variable-themed-color
+    format: hex
+    default-dark: '#ffd23f'
+    default-light: '#b8860b'
+    opacity: false
+
+  -
+    id: swp-c-bold
+    title: Bold text
+    type: variable-themed-color
+    format: hex
+    default-dark: '#ece6ff'
+    default-light: '#2a2440'
+    opacity: false
+
+  -
+    id: swp-c-italic
+    title: Italic text
+    type: variable-themed-color
+    format: hex
+    default-dark: '#ece6ff'
+    default-light: '#2a2440'
     opacity: false
 
 */
@@ -171,11 +595,41 @@ body {
   --swp-font-size: 16px;
   --swp-line-height: 1.65;
 
+  --swp-font-interface: var(--swp-font-text);
+  --swp-font-heading: var(--swp-font-text);
+
   --font-text-theme:      var(--swp-font-text);
-  --font-interface-theme: var(--swp-font-text);
+  --font-interface-theme: var(--swp-font-interface);
   --font-monospace-theme: var(--swp-font-mono);
-  --font-text-size:       var(--swp-font-size);
+  /* --font-text-size is left to Obsidian's Appearance → Font size slider.
+     The theme's own size only applies with "Override Obsidian font size". */
   --line-height-normal:   var(--swp-line-height);
+
+  /* Effective colors = palette values (--swp-p-*, sections 2-3).
+     With "Custom colors" on, the --swp-c-* values from Style Settings win. */
+  --swp-bg-0:     var(--swp-p-bg-0);
+  --swp-bg-1:     var(--swp-p-bg-1);
+  --swp-bg-2:     var(--swp-p-bg-2);
+  --swp-bg-3:     var(--swp-p-bg-3);
+  --swp-line:     var(--swp-p-line);
+  --swp-text:     var(--swp-p-text);
+  --swp-muted:    var(--swp-p-muted);
+  --swp-faint:    var(--swp-p-faint);
+  --swp-accent-1: var(--swp-p-accent-1);
+  --swp-accent-2: var(--swp-p-accent-2);
+  --swp-accent-3: var(--swp-p-accent-3);
+  --swp-accent-4: var(--swp-p-accent-4);
+  --swp-success:  var(--swp-p-success);
+  --swp-warning:  var(--swp-p-warning);
+  --swp-error:    var(--swp-p-error);
+
+  /* Defaults for the optional features (overridden by Style Settings) */
+  --swp-image-dim: 80%;
+  --swp-heading-band-strength: 14%;
+  --swp-heading-band-color: var(--swp-bg-2);
+  --swp-callout-bg-opacity: 0.1;
+  --swp-callout-radius: 8px;
+  --swp-callout-border-width: 1px;
 
   /* Map Synthwave Pro tokens to Obsidian variables */
   --background-primary:         var(--swp-bg-1);
@@ -251,6 +705,31 @@ body {
   --pre-code-font: var(--swp-font-mono);
 }
 
+/* Custom colors: start from the palette, override single elements.
+   Each --swp-c-* is written by Style Settings only for colors the user set;
+   unset ones fall back to the palette value. */
+body.swp-custom-colors {
+  --swp-bg-1:     var(--swp-c-bg-1, var(--swp-p-bg-1));
+  --swp-bg-2:     var(--swp-c-bg-2, var(--swp-p-bg-2));
+  --swp-text:     var(--swp-c-text, var(--swp-p-text));
+  --swp-muted:    var(--swp-c-muted, var(--swp-p-muted));
+  --swp-accent-1: var(--swp-accent-primary, var(--swp-p-accent-1));
+  --swp-accent-2: var(--swp-accent-secondary, var(--swp-p-accent-2));
+  --swp-accent-3: var(--swp-c-accent-3, var(--swp-p-accent-3));
+  --swp-accent-4: var(--swp-c-accent-4, var(--swp-p-accent-4));
+
+  --h1-color: var(--swp-c-h1, var(--swp-accent-1));
+  --h2-color: var(--swp-c-h2, var(--swp-accent-2));
+  --h3-color: var(--swp-c-h3, var(--swp-accent-3));
+  --h4-color: var(--swp-c-h4, var(--swp-accent-4));
+  --link-color: var(--swp-c-link, var(--swp-accent-2));
+  --tag-color:  var(--swp-c-tag, var(--swp-accent-3));
+  --tag-background: color-mix(in srgb, var(--swp-c-tag, var(--swp-accent-3)) 18%, transparent);
+  --text-highlight-bg: color-mix(in srgb, var(--swp-c-highlight, var(--swp-accent-4)) 35%, transparent);
+  --bold-color:   var(--swp-c-bold, currentColor);
+  --italic-color: var(--swp-c-italic, currentColor);
+}
+
 /* =========================================================
    2. PALETTE — Synthwave (default)
    Each palette overrides --swp-* tokens, then maps to Obsidian.
@@ -259,93 +738,93 @@ body {
 /* default = synthwave */
 .theme-dark,
 .theme-dark.swp-palette-synthwave {
-  --swp-bg-0:   #14101f;  /* deepest */
-  --swp-bg-1:   #1a1530;  /* editor */
-  --swp-bg-2:   #221a3d;  /* sidebar */
-  --swp-bg-3:   #2c224d;  /* hover / panel */
-  --swp-line:   #3a2e63;
-  --swp-text:   #ece6ff;  /* warm off-white */
-  --swp-muted:  #a89fcf;
-  --swp-faint:  #6f6695;
-  --swp-accent-1: #ff3ec8;  /* magenta */
-  --swp-accent-2: #36e2ec;  /* cyan */
-  --swp-accent-3: #b56cff;  /* purple */
-  --swp-accent-4: #ffd23f;  /* sun yellow */
-  --swp-success:  #5eead4;
-  --swp-warning:  #ffb86b;
-  --swp-error:    #ff6b9d;
+  --swp-p-bg-0:   #14101f;  /* deepest */
+  --swp-p-bg-1:   #1a1530;  /* editor */
+  --swp-p-bg-2:   #221a3d;  /* sidebar */
+  --swp-p-bg-3:   #2c224d;  /* hover / panel */
+  --swp-p-line:   #3a2e63;
+  --swp-p-text:   #ece6ff;  /* warm off-white */
+  --swp-p-muted:  #a89fcf;
+  --swp-p-faint:  #6f6695;
+  --swp-p-accent-1: #ff3ec8;  /* magenta */
+  --swp-p-accent-2: #36e2ec;  /* cyan */
+  --swp-p-accent-3: #b56cff;  /* purple */
+  --swp-p-accent-4: #ffd23f;  /* sun yellow */
+  --swp-p-success:  #5eead4;
+  --swp-p-warning:  #ffb86b;
+  --swp-p-error:    #ff6b9d;
 }
 
 .theme-dark.swp-palette-outrun {
-  --swp-bg-0:  #1a0f1f;
-  --swp-bg-1:  #241324;
-  --swp-bg-2:  #2e1a2e;
-  --swp-bg-3:  #3b223a;
-  --swp-line:  #4d2d4a;
-  --swp-text:  #ffe8df;
-  --swp-muted: #d6a89f;
-  --swp-faint: #8a6160;
-  --swp-accent-1: #ff7a3d;
-  --swp-accent-2: #ff3e8c;
-  --swp-accent-3: #ffb547;
-  --swp-accent-4: #ff5577;
-  --swp-success: #7be0a7;
-  --swp-warning: #ffb86b;
-  --swp-error:   #ff6b6b;
+  --swp-p-bg-0:  #1a0f1f;
+  --swp-p-bg-1:  #241324;
+  --swp-p-bg-2:  #2e1a2e;
+  --swp-p-bg-3:  #3b223a;
+  --swp-p-line:  #4d2d4a;
+  --swp-p-text:  #ffe8df;
+  --swp-p-muted: #d6a89f;
+  --swp-p-faint: #8a6160;
+  --swp-p-accent-1: #ff7a3d;
+  --swp-p-accent-2: #ff3e8c;
+  --swp-p-accent-3: #ffb547;
+  --swp-p-accent-4: #ff5577;
+  --swp-p-success: #7be0a7;
+  --swp-p-warning: #ffb86b;
+  --swp-p-error:   #ff6b6b;
 }
 
 .theme-dark.swp-palette-miami {
-  --swp-bg-0:  #0d1b2a;
-  --swp-bg-1:  #122438;
-  --swp-bg-2:  #182f47;
-  --swp-bg-3:  #1f3a57;
-  --swp-line:  #2a4a6e;
-  --swp-text:  #e6fbff;
-  --swp-muted: #8fc5d6;
-  --swp-faint: #5a7d8c;
-  --swp-accent-1: #ff4d8d;
-  --swp-accent-2: #2ee6c8;
-  --swp-accent-3: #5ec8ff;
-  --swp-accent-4: #ffe066;
-  --swp-success: #58e6b0;
-  --swp-warning: #ffc266;
-  --swp-error:   #ff5d8d;
+  --swp-p-bg-0:  #0d1b2a;
+  --swp-p-bg-1:  #122438;
+  --swp-p-bg-2:  #182f47;
+  --swp-p-bg-3:  #1f3a57;
+  --swp-p-line:  #2a4a6e;
+  --swp-p-text:  #e6fbff;
+  --swp-p-muted: #8fc5d6;
+  --swp-p-faint: #5a7d8c;
+  --swp-p-accent-1: #ff4d8d;
+  --swp-p-accent-2: #2ee6c8;
+  --swp-p-accent-3: #5ec8ff;
+  --swp-p-accent-4: #ffe066;
+  --swp-p-success: #58e6b0;
+  --swp-p-warning: #ffc266;
+  --swp-p-error:   #ff5d8d;
 }
 
 .theme-dark.swp-palette-tokyo {
-  --swp-bg-0:  #16161e;
-  --swp-bg-1:  #1a1b26;
-  --swp-bg-2:  #1f2030;
-  --swp-bg-3:  #292e42;
-  --swp-line:  #3b4261;
-  --swp-text:  #c0caf5;
-  --swp-muted: #8089b3;
-  --swp-faint: #565f89;
-  --swp-accent-1: #bb9af7;
-  --swp-accent-2: #7aa2f7;
-  --swp-accent-3: #f7768e;
-  --swp-accent-4: #e0af68;
-  --swp-success: #9ece6a;
-  --swp-warning: #e0af68;
-  --swp-error:   #f7768e;
+  --swp-p-bg-0:  #16161e;
+  --swp-p-bg-1:  #1a1b26;
+  --swp-p-bg-2:  #1f2030;
+  --swp-p-bg-3:  #292e42;
+  --swp-p-line:  #3b4261;
+  --swp-p-text:  #c0caf5;
+  --swp-p-muted: #8089b3;
+  --swp-p-faint: #565f89;
+  --swp-p-accent-1: #bb9af7;
+  --swp-p-accent-2: #7aa2f7;
+  --swp-p-accent-3: #f7768e;
+  --swp-p-accent-4: #e0af68;
+  --swp-p-success: #9ece6a;
+  --swp-p-warning: #e0af68;
+  --swp-p-error:   #f7768e;
 }
 
 .theme-dark.swp-palette-soft {
-  --swp-bg-0:  #1c1a26;
-  --swp-bg-1:  #232132;
-  --swp-bg-2:  #2a283d;
-  --swp-bg-3:  #353249;
-  --swp-line:  #423e5c;
-  --swp-text:  #e8e4f0;
-  --swp-muted: #a59cbd;
-  --swp-faint: #6e6688;
-  --swp-accent-1: #d18acb;  /* desaturated magenta */
-  --swp-accent-2: #7bc4c9;  /* desaturated cyan */
-  --swp-accent-3: #a48de0;
-  --swp-accent-4: #d6c279;
-  --swp-success: #8ec9b3;
-  --swp-warning: #d6a87a;
-  --swp-error:   #d68a9c;
+  --swp-p-bg-0:  #1c1a26;
+  --swp-p-bg-1:  #232132;
+  --swp-p-bg-2:  #2a283d;
+  --swp-p-bg-3:  #353249;
+  --swp-p-line:  #423e5c;
+  --swp-p-text:  #e8e4f0;
+  --swp-p-muted: #a59cbd;
+  --swp-p-faint: #6e6688;
+  --swp-p-accent-1: #d18acb;  /* desaturated magenta */
+  --swp-p-accent-2: #7bc4c9;  /* desaturated cyan */
+  --swp-p-accent-3: #a48de0;
+  --swp-p-accent-4: #d6c279;
+  --swp-p-success: #8ec9b3;
+  --swp-p-warning: #d6a87a;
+  --swp-p-error:   #d68a9c;
 }
 
 /* =========================================================
@@ -357,103 +836,103 @@ body {
 /* Light default = synthwave-light */
 .theme-light,
 .theme-light.swp-palette-synthwave {
-  --swp-bg-0:  #efeaf5;  /* deepest sidebar */
-  --swp-bg-1:  #fbf7ff;  /* editor */
-  --swp-bg-2:  #f3edf9;  /* sidebar */
-  --swp-bg-3:  #e8e0f0;  /* hover */
-  --swp-line:  #d6cae8;
-  --swp-text:  #2a2440;  /* deep indigo ink */
-  --swp-muted: #645a82;
-  --swp-faint: #9890ad;
-  --swp-accent-1: #c81f8c;  /* magenta darkened */
-  --swp-accent-2: #0d8a94;  /* cyan darkened */
-  --swp-accent-3: #7a3fc8;  /* purple */
-  --swp-accent-4: #b8860b;  /* sun amber */
-  --swp-success:  #1f8a6e;
-  --swp-warning:  #b76b00;
-  --swp-error:    #c8345e;
+  --swp-p-bg-0:  #efeaf5;  /* deepest sidebar */
+  --swp-p-bg-1:  #fbf7ff;  /* editor */
+  --swp-p-bg-2:  #f3edf9;  /* sidebar */
+  --swp-p-bg-3:  #e8e0f0;  /* hover */
+  --swp-p-line:  #d6cae8;
+  --swp-p-text:  #2a2440;  /* deep indigo ink */
+  --swp-p-muted: #645a82;
+  --swp-p-faint: #9890ad;
+  --swp-p-accent-1: #c81f8c;  /* magenta darkened */
+  --swp-p-accent-2: #0d8a94;  /* cyan darkened */
+  --swp-p-accent-3: #7a3fc8;  /* purple */
+  --swp-p-accent-4: #b8860b;  /* sun amber */
+  --swp-p-success:  #1f8a6e;
+  --swp-p-warning:  #b76b00;
+  --swp-p-error:    #c8345e;
 }
 
 .theme-light.swp-palette-outrun {
-  --swp-bg-0:  #f5ecea;
-  --swp-bg-1:  #fdf6f4;
-  --swp-bg-2:  #f8ede9;
-  --swp-bg-3:  #efe0db;
-  --swp-line:  #e3cfc7;
-  --swp-text:  #3a2018;
-  --swp-muted: #80493d;
-  --swp-faint: #a87f74;
-  --swp-accent-1: #c2441a;
-  --swp-accent-2: #c8246b;
-  --swp-accent-3: #b86b00;
-  --swp-accent-4: #b83456;
-  --swp-success:  #2e8a5e;
-  --swp-warning:  #a55c00;
-  --swp-error:    #c43838;
+  --swp-p-bg-0:  #f5ecea;
+  --swp-p-bg-1:  #fdf6f4;
+  --swp-p-bg-2:  #f8ede9;
+  --swp-p-bg-3:  #efe0db;
+  --swp-p-line:  #e3cfc7;
+  --swp-p-text:  #3a2018;
+  --swp-p-muted: #80493d;
+  --swp-p-faint: #a87f74;
+  --swp-p-accent-1: #c2441a;
+  --swp-p-accent-2: #c8246b;
+  --swp-p-accent-3: #b86b00;
+  --swp-p-accent-4: #b83456;
+  --swp-p-success:  #2e8a5e;
+  --swp-p-warning:  #a55c00;
+  --swp-p-error:    #c43838;
 }
 
 .theme-light.swp-palette-miami {
-  --swp-bg-0:  #e9f1f5;
-  --swp-bg-1:  #f6fafc;
-  --swp-bg-2:  #ecf3f7;
-  --swp-bg-3:  #dde8ee;
-  --swp-line:  #c8d8e0;
-  --swp-text:  #0d2438;
-  --swp-muted: #3f5e75;
-  --swp-faint: #7a93a3;
-  --swp-accent-1: #c8326b;
-  --swp-accent-2: #1a8a78;
-  --swp-accent-3: #2e7fb0;
-  --swp-accent-4: #b8860b;
-  --swp-success:  #1a8a6e;
-  --swp-warning:  #b06a00;
-  --swp-error:    #c83853;
+  --swp-p-bg-0:  #e9f1f5;
+  --swp-p-bg-1:  #f6fafc;
+  --swp-p-bg-2:  #ecf3f7;
+  --swp-p-bg-3:  #dde8ee;
+  --swp-p-line:  #c8d8e0;
+  --swp-p-text:  #0d2438;
+  --swp-p-muted: #3f5e75;
+  --swp-p-faint: #7a93a3;
+  --swp-p-accent-1: #c8326b;
+  --swp-p-accent-2: #1a8a78;
+  --swp-p-accent-3: #2e7fb0;
+  --swp-p-accent-4: #b8860b;
+  --swp-p-success:  #1a8a6e;
+  --swp-p-warning:  #b06a00;
+  --swp-p-error:    #c83853;
 }
 
 .theme-light.swp-palette-tokyo {
-  --swp-bg-0:  #e9eaf0;
-  --swp-bg-1:  #f5f6fa;
-  --swp-bg-2:  #eceef5;
-  --swp-bg-3:  #dde1ec;
-  --swp-line:  #c8cdde;
-  --swp-text:  #1a1d2e;
-  --swp-muted: #4f566e;
-  --swp-faint: #868fa8;
-  --swp-accent-1: #6b3fc8;  /* purple */
-  --swp-accent-2: #2e5fc8;  /* blue */
-  --swp-accent-3: #c2364e;  /* red */
-  --swp-accent-4: #a06800;
-  --swp-success:  #4a7e1f;
-  --swp-warning:  #a06800;
-  --swp-error:    #c2364e;
+  --swp-p-bg-0:  #e9eaf0;
+  --swp-p-bg-1:  #f5f6fa;
+  --swp-p-bg-2:  #eceef5;
+  --swp-p-bg-3:  #dde1ec;
+  --swp-p-line:  #c8cdde;
+  --swp-p-text:  #1a1d2e;
+  --swp-p-muted: #4f566e;
+  --swp-p-faint: #868fa8;
+  --swp-p-accent-1: #6b3fc8;  /* purple */
+  --swp-p-accent-2: #2e5fc8;  /* blue */
+  --swp-p-accent-3: #c2364e;  /* red */
+  --swp-p-accent-4: #a06800;
+  --swp-p-success:  #4a7e1f;
+  --swp-p-warning:  #a06800;
+  --swp-p-error:    #c2364e;
 }
 
 .theme-light.swp-palette-soft {
-  --swp-bg-0:  #f0ecf2;
-  --swp-bg-1:  #faf7fc;
-  --swp-bg-2:  #f3eef6;
-  --swp-bg-3:  #e8e1ec;
-  --swp-line:  #d6cce0;
-  --swp-text:  #2e2740;
-  --swp-muted: #6e6486;
-  --swp-faint: #9c93ae;
-  --swp-accent-1: #9a4a8e;  /* desaturated magenta */
-  --swp-accent-2: #3d8088;  /* desaturated cyan */
-  --swp-accent-3: #6f579a;
-  --swp-accent-4: #8a6f1a;
-  --swp-success:  #4a7e6a;
-  --swp-warning:  #8a5a1a;
-  --swp-error:    #9a4a5e;
+  --swp-p-bg-0:  #f0ecf2;
+  --swp-p-bg-1:  #faf7fc;
+  --swp-p-bg-2:  #f3eef6;
+  --swp-p-bg-3:  #e8e1ec;
+  --swp-p-line:  #d6cce0;
+  --swp-p-text:  #2e2740;
+  --swp-p-muted: #6e6486;
+  --swp-p-faint: #9c93ae;
+  --swp-p-accent-1: #9a4a8e;  /* desaturated magenta */
+  --swp-p-accent-2: #3d8088;  /* desaturated cyan */
+  --swp-p-accent-3: #6f579a;
+  --swp-p-accent-4: #8a6f1a;
+  --swp-p-success:  #4a7e6a;
+  --swp-p-warning:  #8a5a1a;
+  --swp-p-error:    #9a4a5e;
 }
 
 /* =========================================================
    3. BACKGROUND DEPTH MODIFIERS
    ========================================================= */
-.theme-dark.swp-bg-deep   { --swp-bg-1: var(--swp-bg-0); --swp-bg-2: #1a1530; }
-.theme-dark.swp-bg-soft   { --swp-bg-1: #221a3d; --swp-bg-2: #2c224d; --swp-bg-0: #1a1530; }
+.theme-dark.swp-bg-deep   { --swp-p-bg-1: var(--swp-p-bg-0); --swp-p-bg-2: #1a1530; }
+.theme-dark.swp-bg-soft   { --swp-p-bg-1: #221a3d; --swp-p-bg-2: #2c224d; --swp-p-bg-0: #1a1530; }
 
-.theme-light.swp-bg-deep  { --swp-bg-1: var(--swp-bg-0); }
-.theme-light.swp-bg-soft  { --swp-bg-1: #ffffff; --swp-bg-0: var(--swp-bg-2); }
+.theme-light.swp-bg-deep  { --swp-p-bg-1: var(--swp-p-bg-0); }
+.theme-light.swp-bg-soft  { --swp-p-bg-1: #ffffff; --swp-p-bg-0: var(--swp-p-bg-2); }
 
 /* =========================================================
    5. TYPOGRAPHY
@@ -461,9 +940,25 @@ body {
 .markdown-preview-view,
 .markdown-source-view,
 .cm-editor {
-  font-size: var(--swp-font-size);
   line-height: var(--swp-line-height);
   letter-spacing: 0.005em;
+}
+
+/* Optional: the theme's "Base font size" replaces Obsidian's slider.
+   Set on the views (not on body) because Obsidian writes --font-text-size
+   inline on body. */
+body.swp-override-font-size .markdown-preview-view,
+body.swp-override-font-size .markdown-source-view {
+  --font-text-size: var(--swp-font-size);
+}
+
+body {
+  --h1-font: var(--swp-font-heading);
+  --h2-font: var(--swp-font-heading);
+  --h3-font: var(--swp-font-heading);
+  --h4-font: var(--swp-font-heading);
+  --h5-font: var(--swp-font-heading);
+  --h6-font: var(--swp-font-heading);
 }
 
 .markdown-preview-view h1, .HyperMD-header-1,
@@ -488,11 +983,97 @@ body.swp-mono-headings .HyperMD-header {
   font-weight: 600;
 }
 
-/* heading prefix marker — programmer-ish */
-body.swp-mono-headings .markdown-preview-view h1::before { content: "# ";    color: var(--swp-faint); }
-body.swp-mono-headings .markdown-preview-view h2::before { content: "## ";   color: var(--swp-faint); }
-body.swp-mono-headings .markdown-preview-view h3::before { content: "### ";  color: var(--swp-faint); }
-body.swp-mono-headings .markdown-preview-view h4::before { content: "#### "; color: var(--swp-faint); }
+/* heading prefix marker — programmer-ish (also used by compact headings) */
+body:is(.swp-mono-headings, .swp-compact-headings) .markdown-preview-view h1::before { content: "# ";      color: var(--swp-faint); }
+body:is(.swp-mono-headings, .swp-compact-headings) .markdown-preview-view h2::before { content: "## ";     color: var(--swp-faint); }
+body:is(.swp-mono-headings, .swp-compact-headings) .markdown-preview-view h3::before { content: "### ";    color: var(--swp-faint); }
+body:is(.swp-mono-headings, .swp-compact-headings) .markdown-preview-view h4::before { content: "#### ";   color: var(--swp-faint); }
+body:is(.swp-mono-headings, .swp-compact-headings) .markdown-preview-view h5::before { content: "##### ";  color: var(--swp-faint); }
+body:is(.swp-mono-headings, .swp-compact-headings) .markdown-preview-view h6::before { content: "###### "; color: var(--swp-faint); }
+
+/* ---------------------------------------------------------
+   5b. COMPACT HEADINGS (off by default)
+   Body-size, bold, level-colored headings that keep their
+   # marks, on a background band. :is(.theme-dark, .theme-light)
+   raises specificity above the Style Settings heading sizes.
+   --------------------------------------------------------- */
+body:is(.theme-dark, .theme-light).swp-compact-headings {
+  --h1-size: 1em; --h2-size: 1em; --h3-size: 1em;
+  --h4-size: 1em; --h5-size: 1em; --h6-size: 1em;
+  --h1-weight: 700; --h2-weight: 700; --h3-weight: 700;
+  --h4-weight: 700; --h5-weight: 700; --h6-weight: 700;
+  --h1-line-height: var(--swp-line-height); --h2-line-height: var(--swp-line-height);
+  --h3-line-height: var(--swp-line-height); --h4-line-height: var(--swp-line-height);
+  --h5-line-height: var(--swp-line-height); --h6-line-height: var(--swp-line-height);
+
+  /* tinted band (default) */
+  --swp-band-h1: color-mix(in srgb, var(--h1-color) var(--swp-heading-band-strength), var(--background-primary));
+  --swp-band-h2: color-mix(in srgb, var(--h2-color) var(--swp-heading-band-strength), var(--background-primary));
+  --swp-band-h3: color-mix(in srgb, var(--h3-color) var(--swp-heading-band-strength), var(--background-primary));
+  --swp-band-h4: color-mix(in srgb, var(--h4-color) var(--swp-heading-band-strength), var(--background-primary));
+  --swp-band-h5: color-mix(in srgb, var(--h5-color) var(--swp-heading-band-strength), var(--background-primary));
+  --swp-band-h6: color-mix(in srgb, var(--h6-color) var(--swp-heading-band-strength), var(--background-primary));
+}
+body.swp-compact-headings.swp-band-custom {
+  --swp-band-h1: var(--swp-heading-band-color); --swp-band-h2: var(--swp-heading-band-color);
+  --swp-band-h3: var(--swp-heading-band-color); --swp-band-h4: var(--swp-heading-band-color);
+  --swp-band-h5: var(--swp-heading-band-color); --swp-band-h6: var(--swp-heading-band-color);
+}
+body.swp-compact-headings.swp-band-none {
+  --swp-band-h1: transparent; --swp-band-h2: transparent; --swp-band-h3: transparent;
+  --swp-band-h4: transparent; --swp-band-h5: transparent; --swp-band-h6: transparent;
+}
+
+/* line-height above is fixed at 1.25 for big headings; restore body rhythm */
+body.swp-compact-headings .markdown-preview-view :is(h1, h2, h3, h4, h5, h6),
+body.swp-compact-headings .HyperMD-header {
+  line-height: var(--swp-line-height);
+  letter-spacing: normal;
+}
+
+/* Reading view: band + # marks in the heading's own color */
+body.swp-compact-headings .markdown-preview-view :is(h1, h2, h3, h4, h5, h6) {
+  border-radius: 4px;
+  padding: 0.1em 0.5em;
+}
+body.swp-compact-headings .markdown-preview-view h1 { background-color: var(--swp-band-h1); }
+body.swp-compact-headings .markdown-preview-view h2 { background-color: var(--swp-band-h2); }
+body.swp-compact-headings .markdown-preview-view h3 { background-color: var(--swp-band-h3); }
+body.swp-compact-headings .markdown-preview-view h4 { background-color: var(--swp-band-h4); }
+body.swp-compact-headings .markdown-preview-view h5 { background-color: var(--swp-band-h5); }
+body.swp-compact-headings .markdown-preview-view h6 { background-color: var(--swp-band-h6); }
+body.swp-compact-headings .markdown-preview-view :is(h1, h2, h3, h4, h5, h6)::before {
+  color: color-mix(in srgb, currentColor 55%, transparent);
+}
+
+/* Editor (Live Preview + Source): band on the whole CodeMirror line.
+   Padding only, no vertical margins (Obsidian theme guidelines). */
+body.swp-compact-headings .markdown-source-view .HyperMD-header {
+  border-radius: 4px;
+  padding-inline: 0.5em;
+}
+body.swp-compact-headings .markdown-source-view .HyperMD-header-1 { background-color: var(--swp-band-h1); }
+body.swp-compact-headings .markdown-source-view .HyperMD-header-2 { background-color: var(--swp-band-h2); }
+body.swp-compact-headings .markdown-source-view .HyperMD-header-3 { background-color: var(--swp-band-h3); }
+body.swp-compact-headings .markdown-source-view .HyperMD-header-4 { background-color: var(--swp-band-h4); }
+body.swp-compact-headings .markdown-source-view .HyperMD-header-5 { background-color: var(--swp-band-h5); }
+body.swp-compact-headings .markdown-source-view .HyperMD-header-6 { background-color: var(--swp-band-h6); }
+
+/* Source mode / active line: the real # marks, dimmed heading color */
+body.swp-compact-headings .HyperMD-header .cm-formatting-header {
+  color: color-mix(in srgb, currentColor 55%, transparent);
+}
+
+/* Live Preview hides the # marks when the cursor is not on the line:
+   draw them back on those lines only, so the active line never shows two.
+   The line itself is not colored (the inner .cm-header-N span is), hence
+   the explicit --hN-color. */
+body.swp-compact-headings .is-live-preview .HyperMD-header-1:not(.cm-active)::before { content: "# "; color: color-mix(in srgb, var(--h1-color) 55%, transparent); }
+body.swp-compact-headings .is-live-preview .HyperMD-header-2:not(.cm-active)::before { content: "## "; color: color-mix(in srgb, var(--h2-color) 55%, transparent); }
+body.swp-compact-headings .is-live-preview .HyperMD-header-3:not(.cm-active)::before { content: "### "; color: color-mix(in srgb, var(--h3-color) 55%, transparent); }
+body.swp-compact-headings .is-live-preview .HyperMD-header-4:not(.cm-active)::before { content: "#### "; color: color-mix(in srgb, var(--h4-color) 55%, transparent); }
+body.swp-compact-headings .is-live-preview .HyperMD-header-5:not(.cm-active)::before { content: "##### "; color: color-mix(in srgb, var(--h5-color) 55%, transparent); }
+body.swp-compact-headings .is-live-preview .HyperMD-header-6:not(.cm-active)::before { content: "###### "; color: color-mix(in srgb, var(--h6-color) 55%, transparent); }
 
 /* =========================================================
    6. CODE BLOCKS — programmer-grade
@@ -545,8 +1126,9 @@ body.swp-mono-headings .markdown-preview-view h4::before { content: "#### "; col
 }
 
 .callout {
-  border-radius: 8px;
-  border: 1px solid color-mix(in srgb, rgb(var(--callout-color)) 40%, transparent);
+  border-radius: var(--swp-callout-radius);
+  border: var(--swp-callout-border-width) solid color-mix(in srgb, var(--swp-callout-c, rgb(var(--callout-color))) 40%, transparent);
+  background-color: color-mix(in srgb, var(--swp-callout-c, rgb(var(--callout-color))) calc(var(--swp-callout-bg-opacity) * 100%), transparent);
 }
 
 /* Disambiguate the two visually-collapsing pairs.
@@ -565,6 +1147,49 @@ body.swp-mono-headings .markdown-preview-view h4::before { content: "#### "; col
   --callout-color: 230, 60, 60;
   --callout-icon: lucide-hand;
 }
+
+/* Callout styles (Style Settings → Callouts). Default = rules above. */
+body.swp-callout-flat .callout {
+  border: none;
+}
+body.swp-callout-leftbar .callout {
+  border: none;
+  border-left: calc(var(--swp-callout-border-width) + 3px) solid var(--swp-callout-c, rgb(var(--callout-color)));
+  border-radius: 0 var(--swp-callout-radius) var(--swp-callout-radius) 0;
+}
+body.swp-callout-neon .callout {
+  border-color: var(--swp-callout-c, rgb(var(--callout-color)));
+  box-shadow:
+    0 0 8px color-mix(in srgb, var(--swp-callout-c, rgb(var(--callout-color))) 45%, transparent),
+    inset 0 0 8px color-mix(in srgb, var(--swp-callout-c, rgb(var(--callout-color))) 20%, transparent);
+}
+body.swp-callout-terminal .callout {
+  font-family: var(--swp-font-mono);
+  border-style: dashed;
+}
+body.swp-callout-terminal .callout-title-inner {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+body.swp-callout-terminal .callout-title-inner::before {
+  content: "> ";
+}
+
+/* Callout title options */
+body.swp-callout-title-normal .callout-title { --callout-title-weight: 400; }
+body.swp-callout-title-upper .callout-title-inner { text-transform: uppercase; letter-spacing: 0.04em; }
+body.swp-callout-hide-icon .callout-icon { display: none; }
+
+/* Callout colors from the palette: hex accents instead of Obsidian's RGB set */
+body.swp-callout-palette .callout[data-callout] { --swp-callout-c: var(--swp-accent-2); }
+body.swp-callout-palette .callout:is([data-callout="abstract"], [data-callout="summary"], [data-callout="tldr"], [data-callout="example"]) { --swp-callout-c: var(--swp-accent-3); }
+body.swp-callout-palette .callout:is([data-callout="tip"], [data-callout="hint"], [data-callout="success"], [data-callout="check"], [data-callout="done"]) { --swp-callout-c: var(--swp-success); }
+body.swp-callout-palette .callout:is([data-callout="question"], [data-callout="help"], [data-callout="faq"]) { --swp-callout-c: var(--swp-accent-4); }
+body.swp-callout-palette .callout:is([data-callout="warning"], [data-callout="attention"]) { --swp-callout-c: var(--swp-warning); }
+body.swp-callout-palette .callout:is([data-callout="failure"], [data-callout="fail"], [data-callout="missing"], [data-callout="danger"], [data-callout="error"], [data-callout="bug"], [data-callout="caution"]) { --swp-callout-c: var(--swp-error); }
+body.swp-callout-palette .callout[data-callout="important"] { --swp-callout-c: var(--swp-accent-1); }
+body.swp-callout-palette .callout:is([data-callout="quote"], [data-callout="cite"]) { --swp-callout-c: var(--swp-muted); }
+body.swp-callout-palette :is(.callout-title, .callout-icon) { color: var(--swp-callout-c); }
 
 /* =========================================================
    7b. CUSTOM CHECKBOXES (task list states)
@@ -980,6 +1605,18 @@ input[type="checkbox"]:checked {
 ::selection { background: color-mix(in srgb, var(--swp-accent-1) 35%, transparent); }
 
 /* =========================================================
+   8b. IMAGE DIMMING (dark mode, off by default)
+   Full brightness again on hover.
+   ========================================================= */
+body.theme-dark.swp-dim-images :is(.markdown-preview-view, .markdown-source-view) img {
+  filter: brightness(var(--swp-image-dim));
+  transition: filter .2s;
+}
+body.theme-dark.swp-dim-images :is(.markdown-preview-view, .markdown-source-view) img:hover {
+  filter: none;
+}
+
+/* =========================================================
    9. OPTIONAL EFFECTS — glow, grid, scanlines
    ========================================================= */
 
@@ -1019,14 +1656,16 @@ body.swp-grid .markdown-source-view,
 body.swp-grid .markdown-preview-view { position: relative; z-index: 1; }
 
 /* CRT scanlines (off by default).
-   Use position:fixed on body so the overlay covers the entire viewport
-   regardless of Obsidian's flex layout. Tint adapts to dark/light. */
-body.swp-scanlines::after {
+   Fixed overlay on the app window, kept just below Obsidian's modal layer:
+   modals, the mobile image viewer and image-zoom lightboxes (all appended
+   to body, outside .app-container) render above it, without scanlines.
+   Tint adapts to dark/light. */
+body.swp-scanlines .app-container::after {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 9999;
+  z-index: calc(var(--layer-modal, 50) - 1);
   /* Single 2px stripe, tiled via background-size for seamless animation. */
   background-image: linear-gradient(
     to bottom,
@@ -1045,7 +1684,7 @@ body.swp-scanlines::after {
   from { background-position: 0 0; }
   to   { background-position: 0 4px; }  /* one pitch = seamless loop */
 }
-body.swp-scanlines.theme-light::after {
+body.swp-scanlines.theme-light .app-container::after {
   background-image: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.05) 0,

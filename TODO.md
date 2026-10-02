@@ -1,6 +1,14 @@
 # TODO: Synthwave Pro
 
-Piano delle prossime modifiche. Nulla di quanto segue è ancora implementato.
+Piano delle prossime modifiche.
+
+**Stato (2026-10-02):** R-0…R-5, "Compact headings" e le pulizie del README sono implementati su questo branch, non ancora rilasciati (`manifest.json` resta `1.0.1`). Prima del rilascio vanno provati in Obsidian i punti segnati "da verificare" qui sotto, in particolare:
+
+- [ ] lo slider Font size di Obsidian e Ctrl + rotella cambiano il testo; "Override Obsidian font size" lo sostituisce;
+- [ ] Style Settings scrive le variabili solo per i valori cambiati (altrimenti "Use custom colors" sovrascriverebbe tutta la palette con i default Synthwave);
+- [ ] in Live Preview i `#` degli heading compatti compaiono una sola volta, sia sulla riga col cursore sia sulle altre;
+- [ ] le scanlines non coprono il visualizzatore immagini su mobile né i lightbox dei plugin; un'immagine aperta in una scheda propria ha ancora le scanlines (non risolto);
+- [ ] stili dei callout e heading compatti in tutte le palette, dark e light.
 Versione corrente: `1.0.1`. Versione prevista per questo blocco di lavoro: **`1.1.0`** (nuove funzioni, nessuna rottura delle impostazioni esistenti).
 
 ## 1. Richieste degli utenti dal thread Reddit

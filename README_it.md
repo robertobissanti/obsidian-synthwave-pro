@@ -18,10 +18,13 @@ Tema Obsidian con vibe **VaporWave / RetroWave**, pensato per chi passa molte or
 
 ## Installazione
 
-1. Copia la cartella `obsidian-synthwave-pro/` in `<vault>/.obsidian/themes/obsidian-synthwave-pro/`
-2. Settings → Appearance → Theme → seleziona **Synthwave Pro**
-3. Installa il plugin [Style Settings](https://github.com/mgmeyers/obsidian-style-settings)
-4. Apri Settings → Style Settings → Synthwave Pro
+1. Settings → Appearance → Themes → **Manage**, cerca **Synthwave Pro**, poi **Install and use**
+2. Installa il plugin [Style Settings](https://github.com/mgmeyers/obsidian-style-settings)
+3. Apri Settings → Style Settings → Synthwave Pro
+
+Installazione manuale: copia `manifest.json` e `theme.css` in `<vault>/.obsidian/themes/Synthwave Pro/`, poi seleziona il tema in Settings → Appearance.
+
+Il tema usa `color-mix()`, che richiede un installer di Obsidian recente (Chromium 111 o successivo). Se i colori sembrano sbagliati, scarica l'ultimo installer da obsidian.md.
 
 ## Varianti (Style Settings)
 
@@ -29,9 +32,11 @@ Tema Obsidian con vibe **VaporWave / RetroWave**, pensato per chi passa molte or
 |---|---|
 | **Palette** | Synthwave (default) · Outrun · Miami · Tokyo Night · Soft Reading |
 | **Background depth** | Deep · Medium · Soft |
-| **Effetti** | Retro grid · Neon glow · CRT scanlines (tutti off di default) |
-| **Tipografia** | Heading monospace on/off · font text · font mono · size · line-height |
-| **Accenti** | Color picker primario / secondario per override |
+| **Effetti** | Retro grid · Neon glow · CRT scanlines · Attenuazione immagini in dark mode (tutti off di default) |
+| **Tipografia** | Heading monospace · font del testo, dell'interfaccia, degli heading e mono · dimensione del font opzionale (di default vale lo slider Font size di Obsidian) · interlinea · peso del grassetto · dimensione del codice · larghezza di lettura · spaziatura paragrafi · dimensioni H1–H6 |
+| **Heading compatti** | Heading alla dimensione del testo, in grassetto, colorati, con i `#` e una banda di sfondo (tinta per livello, colore unico o nessuna) |
+| **Callout** | Stile (Default · Flat · Left bar · Neon · Terminal) · colori dalla palette · raggio · spessore del bordo · intensità dello sfondo · titolo normale / maiuscolo · icone nascoste |
+| **Colori personalizzati** | Parti da una palette e cambia solo i colori che vuoi: accenti, sfondi, testo, H1–H4, link, tag, evidenziazione, grassetto, corsivo |
 
 ### Suggerimenti d'uso
 
@@ -45,6 +50,8 @@ Tema Obsidian con vibe **VaporWave / RetroWave**, pensato per chi passa molte or
 obsidian-synthwave-pro/
 ├── manifest.json
 ├── theme.css
+├── background.png      (screenshot, palette Synthwave)
+├── background2.png     (screenshot, palette Tokyo Night)
 ├── LICENSE
 ├── README.md
 └── README_it.md

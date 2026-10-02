@@ -18,10 +18,13 @@ An Obsidian theme with a **VaporWave / RetroWave** vibe, built for people who sp
 
 ## Installation
 
-1. Copy the `obsidian-synthwave-pro/` folder into `<vault>/.obsidian/themes/obsidian-synthwave-pro/`
-2. Settings → Appearance → Theme → select **Synthwave Pro**
-3. Install the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) plugin
-4. Open Settings → Style Settings → Synthwave Pro
+1. Settings → Appearance → Themes → **Manage**, search for **Synthwave Pro**, then **Install and use**
+2. Install the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) plugin
+3. Open Settings → Style Settings → Synthwave Pro
+
+Manual install: copy `manifest.json` and `theme.css` into `<vault>/.obsidian/themes/Synthwave Pro/`, then select the theme in Settings → Appearance.
+
+The theme uses `color-mix()`, which needs a recent Obsidian installer (Chromium 111 or newer). If colors look wrong, download the latest installer from obsidian.md.
 
 ## Variants (Style Settings)
 
@@ -29,9 +32,11 @@ An Obsidian theme with a **VaporWave / RetroWave** vibe, built for people who sp
 |---|---|
 | **Palette** | Synthwave (default) · Outrun · Miami · Tokyo Night · Soft Reading |
 | **Background depth** | Deep · Medium · Soft |
-| **Effects** | Retro grid · Neon glow · CRT scanlines (all off by default) |
-| **Typography** | Monospace headings on/off · text font · mono font · size · line-height |
-| **Accents** | Color picker for primary / secondary override |
+| **Effects** | Retro grid · Neon glow · CRT scanlines · Dim images in dark mode (all off by default) |
+| **Typography** | Monospace headings · text, interface, heading and mono fonts · optional font size override (by default Obsidian's own Font size slider applies) · line-height · bold weight · code size · readable line width · paragraph spacing · H1–H6 sizes |
+| **Compact headings** | Headings at body size, bold, colored, with their `#` marks and a background band (tinted per level, single color or none) |
+| **Callouts** | Style (Default · Flat · Left bar · Neon · Terminal) · palette colors · corner radius · border width · background intensity · title weight / uppercase · hide icons |
+| **Custom colors** | Start from a palette and override single colors: accents, backgrounds, text, H1–H4, links, tags, highlight, bold, italic |
 
 ### Usage hints
 
@@ -45,6 +50,8 @@ An Obsidian theme with a **VaporWave / RetroWave** vibe, built for people who sp
 obsidian-synthwave-pro/
 ├── manifest.json
 ├── theme.css
+├── background.png      (screenshot, Synthwave palette)
+├── background2.png     (screenshot, Tokyo Night palette)
 ├── LICENSE
 ├── README.md
 └── README_it.md
