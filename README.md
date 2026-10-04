@@ -24,7 +24,7 @@ An Obsidian theme with a **VaporWave / RetroWave** vibe, built for people who sp
 
 Manual install: copy `manifest.json` and `theme.css` into `<vault>/.obsidian/themes/Synthwave Pro/`, then select the theme in Settings → Appearance.
 
-The theme uses `color-mix()`, which needs a recent Obsidian installer (Chromium 111 or newer). If colors look wrong, download the latest installer from obsidian.md.
+Requires **Obsidian 1.13 or newer** (callout colors changed format in 1.13). The theme also uses `color-mix()`, which needs a recent Obsidian installer (Chromium 111 or newer). If colors look wrong, download the latest installer from obsidian.md.
 
 ## Variants (Style Settings)
 
@@ -43,6 +43,10 @@ The theme uses `color-mix()`, which needs a recent Obsidian installer (Chromium 
 - **Long coding sessions** → `Tokyo Night` or `Soft Reading` palette, glow off, depth medium.
 - **Maximum retrowave vibe** → `Synthwave` + grid on + glow on (mind the headache after an hour).
 - **Long reading** → `Soft Reading`, line-height 1.7, text style Clean.
+
+### Upgrading from 1.0.x
+
+The old "Monospace headings" switch is now **Typography → Text style**. Classic (the default) keeps monospace headings. If you had turned monospace headings off, choose **Clean**.
 
 ## Structure
 

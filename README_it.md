@@ -24,7 +24,7 @@ Tema Obsidian con vibe **VaporWave / RetroWave**, pensato per chi passa molte or
 
 Installazione manuale: copia `manifest.json` e `theme.css` in `<vault>/.obsidian/themes/Synthwave Pro/`, poi seleziona il tema in Settings → Appearance.
 
-Il tema usa `color-mix()`, che richiede un installer di Obsidian recente (Chromium 111 o successivo). Se i colori sembrano sbagliati, scarica l'ultimo installer da obsidian.md.
+Richiede **Obsidian 1.13 o successivo** (dalla 1.13 i colori dei callout hanno un formato diverso). Il tema usa anche `color-mix()`, che richiede un installer di Obsidian recente (Chromium 111 o successivo). Se i colori sembrano sbagliati, scarica l'ultimo installer da obsidian.md.
 
 ## Varianti (Style Settings)
 
@@ -43,6 +43,10 @@ Il tema usa `color-mix()`, che richiede un installer di Obsidian recente (Chromi
 - **Sessioni di codice lunghe** → palette `Tokyo Night` o `Soft Reading`, glow off, depth medium.
 - **Vibe massima retrowave** → `Synthwave` + grid on + glow on (occhio al mal di testa dopo un'ora).
 - **Lettura prolungata di note** → `Soft Reading`, line-height 1.7, stile del testo Clean.
+
+### Aggiornare dalla 1.0.x
+
+Il vecchio interruttore "Monospace headings" ora è **Typography → Text style**. Classic (il default) mantiene gli heading monospace. Se avevi spento gli heading monospace, scegli **Clean**.
 
 ## Struttura
 
