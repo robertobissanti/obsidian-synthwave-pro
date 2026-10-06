@@ -32,7 +32,7 @@ Richiede **Obsidian 1.13 o successivo** (dalla 1.13 i colori dei callout hanno u
 |---|---|
 | **Palette** | Synthwave (default) · Outrun · Miami · Tokyo Night · Soft Reading · Catppuccin Frappé, Macchiato, Mocha (Latte in light mode) · profondità dello sfondo (Deep · Medium · Soft) |
 | **Typography** | Stile del testo: Classic (heading monospace) · Clean · Terminal (tutto monospace su una griglia di righe fissa) · font del testo e monospace · interlinea · peso del grassetto · larghezza di lettura |
-| **Headings** | Large o Compact (dimensione del testo, grassetto, colorati, con banda di sfondo) · `#` prima degli heading · dimensione degli heading · colore e intensità della banda |
+| **Headings** | Large o Compact (dimensione del testo, grassetto, colorati, con banda di sfondo) · heading più grandi in Terminal (sempre sulla griglia di righe) · `#` prima degli heading · dimensione degli heading · scala tra i livelli · interlinea · spazio sopra · peso · colore e intensità della banda |
 | **Images** | Attenuazione delle immagini in dark mode · luminosità |
 | **Effects** | Neon glow · retro grid · CRT scanlines (tutti off di default) |
 | **Callouts** | Stile (Thin border · Flat · Left bar · Neon · Dashed monospace) · colori dalla palette · titolo · icone nascoste · raggio · intensità dello sfondo |

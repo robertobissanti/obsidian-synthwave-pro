@@ -166,6 +166,13 @@ settings:
         value: swp-compact-headings
 
   -
+    id: swp-term-heading-sizes
+    title: Bigger headings in Terminal
+    description: Terminal only. Uses Heading size and Size step, rounded up to whole lines so the grid holds.
+    type: class-toggle
+    default: false
+
+  -
     id: swp-heading-hashes
     title: "Show # before headings"
     description: "Shows #, ## and ### before headings. Always on with Compact headings."
@@ -175,12 +182,52 @@ settings:
   -
     id: swp-heading-scale
     title: Heading size
-    description: 1 = normal. Ignored with Compact headings and in Terminal.
+    description: 1 = normal. Ignored with Compact headings, and in Terminal unless Bigger headings is on.
     type: variable-number-slider
     default: 1
     min: 0.7
     max: 1.5
     step: 0.05
+
+  -
+    id: swp-heading-ratio
+    title: Size step between levels
+    description: "How much bigger each level is than the next one. 1.125 is Obsidian's default, 1.25 makes H1 about three times the text. Ignored with Compact headings, and in Terminal unless Bigger headings is on."
+    type: variable-number-slider
+    default: 1.125
+    min: 1
+    max: 1.4
+    step: 0.025
+
+  -
+    id: swp-heading-line-height
+    title: Heading line height
+    description: Line height of multi-line headings. Ignored with Compact headings and in Terminal.
+    type: variable-number-slider
+    default: 1.25
+    min: 1
+    max: 2
+    step: 0.05
+
+  -
+    id: swp-heading-space
+    title: Space above headings
+    description: 1 = normal, 2 = twice the space. In Terminal, rounded to whole lines. Ignored with Compact headings.
+    type: variable-number-slider
+    default: 1
+    min: 0.5
+    max: 3
+    step: 0.25
+
+  -
+    id: swp-heading-weight
+    title: Heading weight
+    description: Default is 700, or 600 for Classic monospace headings.
+    type: variable-number-slider
+    default: 700
+    min: 300
+    max: 900
+    step: 100
 
   -
     id: swp-heading-band
@@ -966,24 +1013,49 @@ body.swp-override-font-size .markdown-source-view {
   --font-text-size: var(--swp-font-size);
 }
 
-/* Heading sizes: Obsidian's default scale times "Heading size" */
+/* Heading sizes: each level is "Size step between levels" times the next
+   one (1.125 gives 1.802em for H1, the theme's usual scale), all times
+   "Heading size". */
 body {
   --swp-heading-scale: 1;
-  --h1-size: calc(1.802em * var(--swp-heading-scale));
-  --h2-size: calc(1.602em * var(--swp-heading-scale));
-  --h3-size: calc(1.424em * var(--swp-heading-scale));
-  --h4-size: calc(1.266em * var(--swp-heading-scale));
-  --h5-size: calc(1.125em * var(--swp-heading-scale));
+  --swp-heading-ratio: 1.125;
+  --swp-hr2: calc(var(--swp-heading-ratio) * var(--swp-heading-ratio));
+  --swp-hr3: calc(var(--swp-hr2) * var(--swp-heading-ratio));
+  --swp-hr4: calc(var(--swp-hr3) * var(--swp-heading-ratio));
+  --swp-hr5: calc(var(--swp-hr4) * var(--swp-heading-ratio));
+  --h1-size: calc(var(--swp-hr5) * 1em * var(--swp-heading-scale));
+  --h2-size: calc(var(--swp-hr4) * 1em * var(--swp-heading-scale));
+  --h3-size: calc(var(--swp-hr3) * 1em * var(--swp-heading-scale));
+  --h4-size: calc(var(--swp-hr2) * 1em * var(--swp-heading-scale));
+  --h5-size: calc(var(--swp-heading-ratio) * 1em * var(--swp-heading-scale));
   --h6-size: calc(1em * var(--swp-heading-scale));
+  /* "Space above headings" (reading view; the editor is below) */
+  --heading-spacing: calc(var(--p-spacing) * 2.5 * var(--swp-heading-space, 1));
 }
 
+/* --swp-heading-line-height and --swp-heading-weight are only defined when
+   changed in Style Settings, so the fallbacks keep the usual look. */
 .markdown-preview-view h1, .HyperMD-header-1,
 .markdown-preview-view h2, .HyperMD-header-2,
 .markdown-preview-view h3, .HyperMD-header-3,
 .markdown-preview-view h4, .HyperMD-header-4 {
-  font-weight: 700;
+  font-weight: var(--swp-heading-weight, 700);
   letter-spacing: -0.01em;
-  line-height: 1.25;
+  line-height: var(--swp-heading-line-height, 1.25);
+}
+.markdown-preview-view h5, .HyperMD-header-5 {
+  font-weight: var(--swp-heading-weight, var(--h5-weight));
+  line-height: var(--swp-heading-line-height, var(--h5-line-height));
+}
+.markdown-preview-view h6, .HyperMD-header-6 {
+  font-weight: var(--swp-heading-weight, var(--h6-weight));
+  line-height: var(--swp-heading-line-height, var(--h6-line-height));
+}
+
+/* Editor: Obsidian puts padding-top: var(--p-spacing) on heading lines
+   (padding, not margin, per the theme guidelines). */
+.cm-s-obsidian .cm-line.HyperMD-header {
+  padding-top: calc(var(--p-spacing) * var(--swp-heading-space, 1));
 }
 
 /* Text style: Classic = monospace headings */
@@ -996,7 +1068,7 @@ body.swp-style-classic .markdown-preview-view h6,
 body.swp-style-classic .HyperMD-header {
   font-family: var(--swp-font-mono);
   letter-spacing: -0.02em;
-  font-weight: 600;
+  font-weight: var(--swp-heading-weight, 600);
 }
 
 /* note title above the text follows the heading font */
@@ -1020,6 +1092,7 @@ body:is(.swp-heading-hashes, .swp-compact-headings) .markdown-preview-view h6::b
    raises specificity above the Style Settings heading sizes.
    --------------------------------------------------------- */
 body:is(.theme-dark, .theme-light).swp-compact-headings {
+  --heading-spacing: calc(var(--p-spacing) * 2.5);
   --h1-size: 1em; --h2-size: 1em; --h3-size: 1em;
   --h4-size: 1em; --h5-size: 1em; --h6-size: 1em;
   --h1-weight: 700; --h2-weight: 700; --h3-weight: 700;
@@ -1787,6 +1860,32 @@ body.swp-style-terminal .HyperMD-header {
   padding-block: 0;
 }
 
+/* "Space above headings" in whole lines, and "Bigger headings in Terminal":
+   heading lines grow to the next whole number of grid lines. Needs round();
+   without it Terminal keeps one line above and text-size headings. */
+@supports (top: round(1.5px, 1px)) {
+  body.swp-style-terminal:not(.swp-compact-headings) :is(.markdown-preview-view, .markdown-source-view) {
+    --swp-term-hspace: max(1, round(var(--swp-heading-space, 1), 1));
+  }
+  body.swp-style-terminal:not(.swp-compact-headings) .markdown-preview-view :is(h1, h2, h3, h4, h5, h6) {
+    margin-block-start: calc(var(--swp-lh) * var(--swp-term-hspace));
+  }
+  body.swp-style-terminal:not(.swp-compact-headings) .cm-s-obsidian .cm-line.HyperMD-header {
+    padding-top: calc(var(--swp-lh) * var(--swp-term-hspace));
+  }
+  body.swp-style-terminal.swp-term-heading-sizes:not(.swp-compact-headings) :is(.markdown-preview-view, .markdown-source-view) {
+    --h1-size: calc(var(--swp-hr5) * 1em * var(--swp-heading-scale));
+    --h2-size: calc(var(--swp-hr4) * 1em * var(--swp-heading-scale));
+    --h3-size: calc(var(--swp-hr3) * 1em * var(--swp-heading-scale));
+    --h4-size: calc(var(--swp-hr2) * 1em * var(--swp-heading-scale));
+    --h5-size: calc(var(--swp-heading-ratio) * 1em * var(--swp-heading-scale));
+    --h6-size: calc(1em * var(--swp-heading-scale));
+  }
+  body.swp-style-terminal.swp-term-heading-sizes:not(.swp-compact-headings) :is(.markdown-preview-view, .markdown-source-view) :is(h1, h2, h3, h4, h5, h6, .HyperMD-header) {
+    line-height: round(up, 1.15em, var(--swp-lh));
+  }
+}
+
 /* Code blocks: no top/bottom border, rules painted inside */
 body.swp-style-terminal .markdown-rendered pre {
   border-block-width: 0;
@@ -1852,7 +1951,10 @@ body.swp-style-terminal .markdown-rendered hr {
 /* Compact headings always show the # marks */
 body.swp-compact-headings .setting-item[data-id="swp-heading-hashes"],
 /* Compact headings and Terminal fix headings at text size */
-body:is(.swp-compact-headings, .swp-style-terminal) .setting-item[data-id="swp-heading-scale"],
+body.swp-compact-headings .setting-item:is([data-id="swp-heading-scale"], [data-id="swp-heading-ratio"], [data-id="swp-heading-line-height"], [data-id="swp-heading-space"], [data-id="swp-term-heading-sizes"]),
+body.swp-style-terminal:not(.swp-term-heading-sizes) .setting-item:is([data-id="swp-heading-scale"], [data-id="swp-heading-ratio"]),
+body.swp-style-terminal .setting-item[data-id="swp-heading-line-height"],
+body:not(.swp-style-terminal) .setting-item[data-id="swp-term-heading-sizes"],
 /* band options only for Compact headings */
 body:not(.swp-compact-headings) .setting-item:is([data-id="swp-heading-band"], [data-id="swp-heading-band-strength"], [data-id="swp-heading-band-color"]),
 body:not(.swp-band-tinted) .setting-item[data-id="swp-heading-band-strength"],
