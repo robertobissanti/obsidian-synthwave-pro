@@ -82,7 +82,7 @@ settings:
   -
     id: swp-text-style
     title: Text style
-    description: Terminal sets all text in the monospace font on a fixed line grid, like a terminal window.
+    description: "Terminal sets all text in the monospace font on a fixed line grid, like a terminal window. Headings stay at text size; to make them stand out, set Headings → Heading style to Compact for a colored band behind each heading."
     type: class-select
     default: swp-style-classic
     allowEmpty: false
@@ -153,7 +153,7 @@ settings:
   -
     id: swp-heading-style
     title: Heading style
-    description: Compact makes headings as big as the text, bold and colored, on a background band.
+    description: Compact makes headings as big as the text, bold and colored, with their # marks on a background band. Pairs well with the Terminal text style.
     type: class-select
     default: swp-headings-large
     allowEmpty: false
