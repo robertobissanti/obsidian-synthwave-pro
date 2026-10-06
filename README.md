@@ -32,7 +32,7 @@ Requires **Obsidian 1.13 or newer** (callout colors changed format in 1.13). The
 |---|---|
 | **Palette** | Synthwave (default) · Outrun · Miami · Tokyo Night · Soft Reading · Catppuccin Frappé, Macchiato, Mocha (Latte in light mode) · background depth (Deep · Medium · Soft) |
 | **Typography** | Text style: Classic (monospace headings) · Clean · Terminal (all monospace on a fixed line grid) · text and monospace fonts · line height · bold weight · readable line width |
-| **Headings** | Large or Compact (text size, bold, colored, with a background band) · bigger headings in Terminal (kept on the line grid) · `#` before headings · heading size · size step between levels · line height · space above · weight · band color and intensity |
+| **Headings** | Large or Compact (text size, bold, colored, with a background band) · `#` before headings · heading size · size step between levels · line height · space above · weight · band color and intensity |
 | **Images** | Dim images in dark mode · brightness |
 | **Effects** | Neon glow · retro grid · CRT scanlines (all off by default) |
 | **Callouts** | Style (Thin border · Flat · Left bar · Neon · Dashed monospace) · palette colors · title · hide icons · corner radius · background intensity |

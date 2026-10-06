@@ -166,13 +166,6 @@ settings:
         value: swp-compact-headings
 
   -
-    id: swp-term-heading-sizes
-    title: Bigger headings in Terminal
-    description: Terminal only. Uses Heading size and Size step, rounded up to whole lines so the grid holds.
-    type: class-toggle
-    default: false
-
-  -
     id: swp-heading-hashes
     title: "Show # before headings"
     description: "Shows #, ## and ### before headings. Always on with Compact headings."
@@ -182,7 +175,7 @@ settings:
   -
     id: swp-heading-scale
     title: Heading size
-    description: 1 = normal. Ignored with Compact headings, and in Terminal unless Bigger headings is on.
+    description: 1 = normal. Ignored with Compact headings and in Terminal.
     type: variable-number-slider
     default: 1
     min: 0.7
@@ -192,7 +185,7 @@ settings:
   -
     id: swp-heading-ratio
     title: Size step between levels
-    description: "How much bigger each level is than the next one. 1.125 is Obsidian's default, 1.25 makes H1 about three times the text. Ignored with Compact headings, and in Terminal unless Bigger headings is on."
+    description: "How much bigger each level is than the next one. 1.125 is Obsidian's default, 1.25 makes H1 about three times the text. Ignored with Compact headings and in Terminal."
     type: variable-number-slider
     default: 1.125
     min: 1
@@ -1860,9 +1853,8 @@ body.swp-style-terminal .HyperMD-header {
   padding-block: 0;
 }
 
-/* "Space above headings" in whole lines, and "Bigger headings in Terminal":
-   heading lines grow to the next whole number of grid lines. Needs round();
-   without it Terminal keeps one line above and text-size headings. */
+/* "Space above headings" in whole grid lines. Needs round(); without it
+   Terminal keeps one line above. */
 @supports (top: round(1.5px, 1px)) {
   body.swp-style-terminal:not(.swp-compact-headings) :is(.markdown-preview-view, .markdown-source-view) {
     --swp-term-hspace: max(1, round(var(--swp-heading-space, 1), 1));
@@ -1872,17 +1864,6 @@ body.swp-style-terminal .HyperMD-header {
   }
   body.swp-style-terminal:not(.swp-compact-headings) .cm-s-obsidian .cm-line.HyperMD-header {
     padding-top: calc(var(--swp-lh) * var(--swp-term-hspace));
-  }
-  body.swp-style-terminal.swp-term-heading-sizes:not(.swp-compact-headings) :is(.markdown-preview-view, .markdown-source-view) {
-    --h1-size: calc(var(--swp-hr5) * 1em * var(--swp-heading-scale));
-    --h2-size: calc(var(--swp-hr4) * 1em * var(--swp-heading-scale));
-    --h3-size: calc(var(--swp-hr3) * 1em * var(--swp-heading-scale));
-    --h4-size: calc(var(--swp-hr2) * 1em * var(--swp-heading-scale));
-    --h5-size: calc(var(--swp-heading-ratio) * 1em * var(--swp-heading-scale));
-    --h6-size: calc(1em * var(--swp-heading-scale));
-  }
-  body.swp-style-terminal.swp-term-heading-sizes:not(.swp-compact-headings) :is(.markdown-preview-view, .markdown-source-view) :is(h1, h2, h3, h4, h5, h6, .HyperMD-header) {
-    line-height: round(up, 1.15em, var(--swp-lh));
   }
 }
 
@@ -1951,10 +1932,8 @@ body.swp-style-terminal .markdown-rendered hr {
 /* Compact headings always show the # marks */
 body.swp-compact-headings .setting-item[data-id="swp-heading-hashes"],
 /* Compact headings and Terminal fix headings at text size */
-body.swp-compact-headings .setting-item:is([data-id="swp-heading-scale"], [data-id="swp-heading-ratio"], [data-id="swp-heading-line-height"], [data-id="swp-heading-space"], [data-id="swp-term-heading-sizes"]),
-body.swp-style-terminal:not(.swp-term-heading-sizes) .setting-item:is([data-id="swp-heading-scale"], [data-id="swp-heading-ratio"]),
-body.swp-style-terminal .setting-item[data-id="swp-heading-line-height"],
-body:not(.swp-style-terminal) .setting-item[data-id="swp-term-heading-sizes"],
+body.swp-compact-headings .setting-item:is([data-id="swp-heading-scale"], [data-id="swp-heading-ratio"], [data-id="swp-heading-line-height"], [data-id="swp-heading-space"]),
+body.swp-style-terminal .setting-item:is([data-id="swp-heading-scale"], [data-id="swp-heading-ratio"], [data-id="swp-heading-line-height"]),
 /* band options only for Compact headings */
 body:not(.swp-compact-headings) .setting-item:is([data-id="swp-heading-band"], [data-id="swp-heading-band-strength"], [data-id="swp-heading-band-color"]),
 body:not(.swp-band-tinted) .setting-item[data-id="swp-heading-band-strength"],
